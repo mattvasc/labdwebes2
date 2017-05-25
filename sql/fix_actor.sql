@@ -1,23 +1,39 @@
-CREATE OR REPLACE FUNCTION fix_language(movieid integer, languages varchar(1000)) RETURNS void AS
+CREATE OR REPLACE FUNCTION fix_actor_and_act(movieid integer,actorid integer, actorname varchar(250), sex character (1), as_character character varying(250)) RETURNS void AS
 $$
 BEGIN
-    INSERT INTO language (movieid, language) VALUES (movieid, TRIM(UNNEST(STRING_TO_ARRAY(languages, ';'))));
+    INSERT INTO actor (actorid, actorname) VALUES (actorid, actorname);
+    INSERT INTO act (movieid, actorid, as_character, sex) VALUES (movieid, actorid, as_character, sex);
 END
-$$ LANGUAGE 'plpgsql';
+$$ actor 'plpgsql';
 
-CREATE OR REPLACE FUNCTION call_fix_language() RETURNS void AS
+CREATE OR REPLACE FUNCTION call_fix_actor_and_act() RETURNS void AS
   $$
   BEGIN
-      PERFORM fix_language( movieid, languages ) FROM (SELECT DISTINCT t.movieid, t.languages FROM movies_slice AS t) AS s; -- is ok
-      ALTER TABLE movies_slice DROP COLUMN languages;
+      -- Criar tabelas
+      CREATE TABLE actor
+      (
+        actorid integer,
+        actorname character varying(250)
+      );
+      CREATE TABLE act
+      (
+        movieid integer,
+        actorid integer,
+        as_character character varying(250),
+        sex character (1)
+      );
+      -- Povoar Tabelas
+      PERFORM fix_actor_and_act(movieid, actorid, actorname, sex, as_character) FROM (SELECT DISTINCT t.movieid, t.actorid, t.actorname, t.sex, t.as_character FROM movies_slice AS t) AS s; -- is ok
+      -- Dropar colunas da tabela original
+      ALTER TABLE movies_slice DROP COLUMN actorname, actorid, sex, as_character;
   END
-$$ LANGUAGE 'plpgsql';
+$$ actor 'plpgsql';
 
 -- Normatizando Campos
 DO $$
   BEGIN
-  CREATE TABLE language(movieid integer,  character varying(1000)); -- Criar tabela actor
-    PERFORM call_fix_language(); -- executar o fix_actor
+
+    PERFORM call_fix_actor_and_act(); -- executar o fix_actor
     -- drop colunas relacionadas com actor
 END;
 $$;
