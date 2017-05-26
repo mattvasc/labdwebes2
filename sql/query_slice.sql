@@ -1,5 +1,6 @@
 
-
+DROP TABLE IF EXISTS movies_slice;
+DROP TABLE IF EXISTS directorsmovies_slice;
 -- Cria cão das tabelas:
 CREATE TABLE public.movies_slice
 (
