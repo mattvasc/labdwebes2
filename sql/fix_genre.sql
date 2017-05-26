@@ -12,14 +12,12 @@ $$ LANGUAGE 'plpgsql';
 CREATE OR REPLACE FUNCTION  call_fix_genre() RETURNS void AS
 $$
 BEGIN
-DO $$
-  BEGIN
     PERFORM fix_genre( movieid, genres ) FROM (SELECT DISTINCT t.movieid, t.genres FROM movies_slice AS t) AS s; -- is ok
     ALTER TABLE movies_slice DROP COLUMN genres;
-  END;
-$$;
 
-END $$ LANGUAGE 'plpgsql';
+END
+$$ LANGUAGE 'plpgsql';
+
 
 -- Normatizando Campos
 DO $$
