@@ -4,7 +4,7 @@ BEGIN
     INSERT INTO actor (actorid, actorname) VALUES (actorid, actorname);
     INSERT INTO act (movieid, actorid, as_character, sex) VALUES (movieid, actorid, as_character, sex);
 END
-$$ actor 'plpgsql';
+$$ LANGUAGE 'plpgsql';
 
 CREATE OR REPLACE FUNCTION call_fix_actor_and_act() RETURNS void AS
   $$
@@ -25,9 +25,9 @@ CREATE OR REPLACE FUNCTION call_fix_actor_and_act() RETURNS void AS
       -- Povoar Tabelas
       PERFORM fix_actor_and_act(movieid, actorid, actorname, sex, as_character) FROM (SELECT DISTINCT t.movieid, t.actorid, t.actorname, t.sex, t.as_character FROM movies_slice AS t) AS s; -- is ok
       -- Dropar colunas da tabela original
-      ALTER TABLE movies_slice DROP COLUMN actorname, actorid, sex, as_character;
+      ALTER TABLE movies_slice DROP COLUMN actorname, DROP COLUMN actorid, DROP COLUMN sex, DROP COLUMN as_character;
   END
-$$ actor 'plpgsql';
+$$ LANGUAGE 'plpgsql';
 
 -- Normatizando Campos
 DO $$
