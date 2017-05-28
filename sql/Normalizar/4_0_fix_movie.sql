@@ -2,7 +2,7 @@
 CREATE OR REPLACE FUNCTION fix_movies(movieid integer, title character varying(400), mvyear character varying(100)) RETURNS void AS
 $$
 BEGIN
-    INSERT INTO movies_slice (movieid, title, mvyear) VALUES (movieid, title, mvyear) ON CONFLICT DO NOTHING;;
+    INSERT INTO movies_slice (movieid, title, mvyear) VALUES (movieid, title, mvyear) ON CONFLICT DO NOTHING;
 END
 $$ LANGUAGE 'plpgsql';
 
