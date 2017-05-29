@@ -23,7 +23,7 @@ CREATE TABLE public.directorsmovies_slice
 (
   movieid integer,
   directorid integer,
-  dname character varying(50000),
+  dname character varying(500),
   addition character varying(1000)
 )
 WITH (
@@ -37,7 +37,7 @@ INSERT INTO public.movies_slice(
             languages, genres)
 SELECT movieid, title, mvyear, actorid, actorname, sex, as_character,
        languages, genres
-  FROM public.movies LIMIT 500;
+  FROM public.movies LIMIT 50000;
 
   INSERT INTO public.directorsmovies_slice(
               movieid, directorid, dname, addition)
