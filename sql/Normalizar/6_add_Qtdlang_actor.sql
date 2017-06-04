@@ -1,8 +1,8 @@
 CREATE OR REPLACE FUNCTION call_fix_actor() RETURNS void AS
 $$
   BEGIN
-  ALTER TABLE actor ADD lang integer;
-  UPDATE actor SET lang = i.numlangs FROM (SELECT act.actorid as id, COUNT(DISTINCT l.lang) as numlangs
+  ALTER TABLE actor ADD n_lang integer;
+  UPDATE actor SET n_lang = i.numlangs FROM (SELECT act.actorid as id, COUNT(DISTINCT l.lang) as numlangs
    FROM act JOIN
         lang l
         USING (movieid)
