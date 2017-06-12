@@ -45,9 +45,8 @@ public class ListaGenero extends HttpServlet {
         //Lista de generos fresquinha do banco...
         ArrayList<Genero> generos = gdao.getGeneros();
         // Adicionando a lista como JSON no retorno da página
-        try (PrintWriter out = response.getWriter()) {
-            out.print(gson.toJson(generos));
-        }
+        response.getWriter().print(gson.toJson(generos));
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
