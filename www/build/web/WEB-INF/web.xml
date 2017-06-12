@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-     <servlet>
+    <servlet>
         <servlet-name>works</servlet-name>
         <jsp-file>/works.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>ListaGenero</servlet-name>
+        <servlet-class>Controller.ListaGenero</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>works</servlet-name>
         <url-pattern>/works</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>services</servlet-name>
         <jsp-file>/services.jsp</jsp-file>
@@ -17,9 +20,7 @@
         <servlet-name>services</servlet-name>
         <url-pattern>/services</url-pattern>
     </servlet-mapping>
-    
-    
-        <servlet>
+    <servlet>
         <servlet-name>about</servlet-name>
         <jsp-file>/about.jsp</jsp-file>
     </servlet>
@@ -27,9 +28,10 @@
         <servlet-name>about</servlet-name>
         <url-pattern>/about</url-pattern>
     </servlet-mapping>
-    
-    
-  
+    <servlet-mapping>
+        <servlet-name>ListaGenero</servlet-name>
+        <url-pattern>/ListaGenero</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
