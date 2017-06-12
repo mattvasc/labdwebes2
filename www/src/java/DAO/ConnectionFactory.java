@@ -25,7 +25,6 @@ public class ConnectionFactory{
          Class.forName("org.postgresql.Driver");
          
          
-      
         Properties props = new Properties();
         props.setProperty("user","aluno");
         props.setProperty("password","aluno");

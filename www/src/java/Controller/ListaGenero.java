@@ -31,16 +31,20 @@ public class ListaGenero extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, 
+        HttpServletResponse response)
+        throws ServletException, IOException {
+        // O tipo do retorno vai ser JSON
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-       
+        // Instanciando o DAO que faz o acesso a persistencia de dados...
         GeneroDAO gdao = new GeneroDAO();
         // Biblioteca da Google para manipular EDs de java para json
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
-        
+        //Lista de generos fresquinha do banco...
         ArrayList<Genero> generos = gdao.getGeneros();
+        // Adicionando a lista como JSON no retorno da página
         try (PrintWriter out = response.getWriter()) {
             out.print(gson.toJson(generos));
         }
