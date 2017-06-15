@@ -1,3 +1,4 @@
+ALTER TABLE actor ADD COLUMN n_lang integer;
 
   UPDATE actor SET n_lang = i.numlangs FROM (SELECT act.actorid as id, COUNT(DISTINCT l.lang) as numlangs
    FROM act JOIN
