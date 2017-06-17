@@ -12,6 +12,10 @@
         <servlet-name>Ranking</servlet-name>
         <servlet-class>Controller.Ranking</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TestePaginacao</servlet-name>
+        <servlet-class>Controller.TestePaginacao</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>works</servlet-name>
         <url-pattern>/works</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>pagination</servlet-name>
         <url-pattern>/pagination</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TestePaginacao</servlet-name>
+        <url-pattern>/TestePaginacao</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
