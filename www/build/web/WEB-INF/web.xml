@@ -40,6 +40,14 @@
         <servlet-name>Ranking</servlet-name>
         <url-pattern>/Ranking</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>pagination</servlet-name>
+        <jsp-file>/testePagination.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>pagination</servlet-name>
+        <url-pattern>/pagination</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
