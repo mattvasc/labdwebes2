@@ -1,87 +1,87 @@
-<%-- 
-    Document   : paginacao
-    Created on : Jun 15, 2017, 5:31:01 PM
-    Author     : spectrus
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Endless Scroll Demo (by Fred Wu)</title>
-        <script src="assets/js/jquery-1.7.2min.js"></script>
-        <script src="assets/js/jquery.endless-scroll.js"></script>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="assets/img/pic4.jpg">
 
-        <style type="text/css" media="screen">
-            * { margin: auto; }
-            body { margin: 20px 0; background: #abc; color: #111; font-family: Helvetica, Arial, Verdana, 'Lucida Grande', sans-serif; }
-            h1, h3, p { text-align: center; }
-            div.example { padding: 20px; margin: 10px auto; background: #bcd; width: 750px; }
-            div.example h3 { margin-bottom: 10px; }
-            ul, ol { padding: 0; }
-            #list { width: 50px; height: 150px; overflow-y: scroll; }
-            #images { width: 600px;  overflow-x: hidden; text-align: center; list-style: none; }
-            .endless_scroll_loader { position: fixed; top: 10px; right: 20px; }
-            #numbers {
-                margin: 2em auto;
-                padding: 0;
-                width: 15em;
-                height: 10em;
-                overflow: auto;
-                text-align: center;
-                list-style-type: none;
-            }
-        </style>
+        <script type="text/javascript" src="assets/js/jquery-3.2.1.slim.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.simplePagination.js"></script>
+        <title>CineData: Consulta 2</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="assets/css/bootstrap.css" rel="stylesheet">
+        <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+
     </head>
     <body>
-        <h1>Hello World!</h1>
-        Antes da div <br />
-        <div class="example">
-            <ul id="images" class="jscroll"> <li>Conte√∫do Inicial! <br /> </li><li>Conte√∫do Inicial! <br /> </li><li>Conte√∫do Inicial!</li></ul> 
-        </div>
+ <script type="text/javascript">
+                        $(document).ready(function () {
+                            $('#qtd').hide();
+                            $('input:radio[name="linguas"]').change(function () {
+                                if ($(this).val() == '1') {
+                                    $("#qtd").show();
+                                } else {
+                                    $('#qtd').hide();
+                                }
+                            });
 
-        Depois da div.
-        <div class="example">
-            <ul id="numbers">
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
 
-            </ul>
+                            function checkFragment() {
+                                // If there's no hash, treat it like page 1.
+                                var hash = window.location.hash || "#page-1";
+                                // We'll use a regular expression to check the hash string.
+                                hash = hash.match(/^#page-(\d+)$/);
+                                if (hash) {
+                                    // The `selectPage` function is described in the documentation.
+                                    // We've captured the page number in a regex group: `(\d+)`.
+                                    $(".pagination-page").pagination("selectPage", parseInt(hash[1]));
+                                }
+                            }
+                            ;
+                            // We'll call this function whenever back/forward is pressed...
+                            $(window).bind("popstate", checkFragment);
+                            // ... and we'll also call it when the page has loaded
+                            // (which is right now).
+                            checkFragment();
 
-        </div>
-        <script type="text/javascript" charset="utf-8">
-            $(document).ready(function () {
-                console.log("Pronto!");
-                $('#numbers').endlessScroll({
-                    fireOnce: false,
-                    fireDelay: false,
-                    loader: '',
-                    insertAfter: '#numbers li:last',
-                    content: function (i) {
-                        return '<li>' + (i + offset) + '</li>';
-                    }
-                });
 
-                $('#images').endlessScroll({
-                    loader: '<small> "Loading" ... </small>',
-                    callback: function (p) {
-                        console.log("test");
-                    },
-                    pagesToKeep: 10,
-                    fireOnce: false,
-                    content: function (i, p) {
-                        console.log(i, p)
-                        return '<li>' + p + '</li>'
-                    }
 
-                });
-                console.log("ap√≥s coiso l√°");
-            });
+                        });
+
+                        // Roda quando a pessoa clica em Gerar!
+                        function validar() {
+                            if (document.getElementById('apenas_x_linguas').checked) {
+                                // VALIDAR ENTRADA ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+                                $("#n_linguas").val($("#x").val());
+
+                            } else if (document.getElementById('todas_as_linguas').checked) {
+                                $("#n_linguas").val('1');
+                            }
+
+                            // Chama ajax pro servelet /Ranking passando as informaÁıes criar=1, e o n_lang
+                            $.ajax({
+                                type: "GET",
+                                url: "Ranking?criar=1&n_lang=" + $("#n_linguas").val(),
+                                dataType: "json",
+                                success: function (data, textStatus, jqXHR) {
+                                    // $('#content').append(");
+                                    alert(data);
+                                }
+                            });
+                            // A partir daÌ vai ser sÛ outros ajaxes para o infinte scrolling.
+                        }/*
+                         $(".pagination-page").pagination({
+                         items: 20,
+                         cssStyle: "light-theme",
+                         // This is the actual page changing functionality.
+                         onPageClick: function (pageNumber) {} 
+                         });*/
 
         </script>
+        
+         <script src="assets/js/bootstrap.min.js"></script>
     </body>
-</html>

@@ -13,10 +13,13 @@
         <!-- Bootstrap core CSS -->
         <link href="assets/css/bootstrap.css" rel="stylesheet">
         <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+        <link href="assets/css/simplePagination.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
         <link href="assets/css/main.css" rel="stylesheet">
+        <script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
 
+        <script type="text/javascript" src="assets/js/jquery.simplePagination.js"></script>
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -42,7 +45,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="index.jsp">HOME</a></li>
                         <li><a href="works.jsp">WORKS</a></li>
-                        <li class="active"><a href="services.jsp">SERVICES</a></li>
+                        <li class="active"><a href="services.jsp">Ranking</a></li>
                         <li><a href="about.jsp">ABOUT</a></li>
 
                         <li><a data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-envelope-o"></i></a></li>
@@ -80,6 +83,10 @@
                 <div class="row centered">
                     <input type="button" value="Gerar!" onclick="validar()">
                 </div>
+                <div id="content">
+
+                </div>
+
             </form>
         </div><!-- container -->
 
@@ -131,10 +138,11 @@
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="assets/js/jquery-3.2.1.slim.min.js"></script>
+
         <script src="assets/js/bootstrap.min.js"></script>
         <script type="text/javascript">
                         $(document).ready(function () {
+
                             $('#qtd').hide();
                             $('input:radio[name="linguas"]').change(function () {
                                 if ($(this).val() == '1') {
@@ -144,19 +152,60 @@
                                 }
                             });
                         });
-                        
                         // Roda quando a pessoa clica em Gerar!
                         function validar() {
                             if (document.getElementById('apenas_x_linguas').checked) {
+
                                 // VALIDAR ENTRADA ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
                                 $("#n_linguas").val($("#x").val());
                             } else if (document.getElementById('todas_as_linguas').checked) {
-                                $("#n_linguas").val('0');
+                                $("#n_linguas").val('1');
                             }
-                           
-                           // Chama ajax pro servelet /Ranking passando as informações criar=1, e o n_lang
-                           // A partir daí vai ser só outros ajaxes para o infinte scrolling.
+
+                            // Chama ajax pro servelet /Ranking passando as informações criar=1, e o n_lang
+
+                            // Itens por página:
+                            var limite = 10;
+
+                            $.ajax({
+                                type: "GET",
+                                url: "Ranking?criar=1&n_lang=" + $("#n_linguas").val(),
+                                dataType: "json",
+                                timeout: 3000,
+                                error: function () {
+                                    alert("Tempo esgotado!");
+                                },
+                                success: function (data) {
+                                    $.each(data, function (index, value) {
+                                        //Criando os botões de colapso:
+                                        $('#content').append("  <div class='row'><button data-toggle='collapse' data-target='#collapso-" + value + "'> Mostrar Ranking " + value + " </button> <div class='collapse' id='collapso-" + value + "'> <div  id='content-" + value + "'> Carregando... </div><div id='pag-" + value + "'> </div></div> </div>");
+                                        $.get("/Ranking?criar=0&n_lang=" + value, function (quantidade_de_atores_na_pagina) {
+                                            $('#pag-' + value).pagination({
+                                                items: quantidade_de_atores_na_pagina,
+                                                itemsOnPage: limite,
+                                                hrefTextPrefix: "#pag",
+                                                onPageClick: function (pageNumber) {
+                                                    document.getElementById('content-' + value).innerHTML = "";
+                                                    $.get("/Ranking?criar=0&n_lang=" + value + "&limit=" + limite + "&offset=" + ((pageNumber - 1) * limite), function (array_de_atores) {
+                                                        $.each(array_de_atores, function (index, ator) {
+                                                            console.log(ator);
+                                                            document.getElementById('content-' + value).innerHTML += ator.ActorName + "<br />";
+
+                                                        });
+                                                    });
+
+                                                }
+                                            }
+                                            );
+                                        });
+                                    });
+                                }
+                            }
+                            );
                         }
+
+
         </script>
     </body>
 </html>
