@@ -29,7 +29,7 @@ public class ConnectionFactory{
         props.setProperty("user","aluno");
         props.setProperty("password","aluno");
         props.setProperty("ssl","false");
-        String url = "jdbc:postgresql://localhost/imdb";
+        String url = "jdbc:postgresql://localhost/imdb2";
         
         conexao = DriverManager.getConnection(url, props);
 
@@ -40,7 +40,7 @@ public class ConnectionFactory{
          //System.exit(0);
       } finally{
         return conexao;
-        }
+      }
       
         
     }

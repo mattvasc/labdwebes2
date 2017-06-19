@@ -15,29 +15,27 @@
         <script type="text/javascript" src="assets/js/jquery.simplePagination.js"></script>
         <script>
             jQuery(function ($) {
-                // Consider adding an ID to your table
-                // incase a second table ever enters the picture.
-                var items = $("table tbody tr");
-
-                var numItems = items.length;
-                var perPage = 2;
-
-                // Only show the first 2 (or first `per_page`) items initially.
-                items.slice(perPage).hide();
-
-                // Now setup the pagination using the `.pagination-page` div.
                 $(".pagination-page").pagination({
                     items: 20,
-                    itemsOnPage: perPage,
                     cssStyle: "light-theme",
 
                     // This is the actual page changing functionality.
                     onPageClick: function (pageNumber) {
-
+//                        $.ajax({
+//                            type: "GET", 
+//                            url: "TestePaginação?pag=" + pageNumber, 
+//                            dataType: "html", 
+//                            data: {pageNumber},
+//                            success: function(data, textStatus, jqXHR) {
+//                              $('#tbody').html(data);
+//                              alert(data);
+//                            }
+//                        });                       
+//                        
                         /*Aqui entra um AJAX para pegar o conteúdo necessário*/
                         $.get("/TestePaginacao?pag=" + pageNumber, function (data, status) {
                             //alert("Data: " + data + "\nStatus: " + status);
-                            document.getElementById('content').innerHTML = (data);
+                            document.getElementById('tbody').innerHTML = (data);
 
                         });
                     }
@@ -73,12 +71,27 @@
         <h1>Hello World!</h1>
 
         <div id="content">
-            Página 1
+            <table>
+                <thead>
+                    <tr>
+                        <td style="text-align: left">Movie Id</td>
+                        <td style="text-align: left">Title</td>
+                        <td style="text-align: left">Genre</td>
+                        <td style="text-align: left">Actor</td> 
+                    </tr>
+                </thead>
+                <tbody name="tbody" id="tbody">
+                </tbody>
+            </table>
         </div>
-
-        <div class="pagination-holder clearfix">
-            <div id="light-pagination" class="pagination-page"></div>
-        </div>
+        
+        <form method="POST" action="ListaGenero">
+            
+            
+            <div class="pagination-holder clearfix">
+                <div id="light-pagination" class="pagination-page"></div>
+            </div>            
+        </form>
 
     </body>
 

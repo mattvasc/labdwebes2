@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import DAO.*;
+import java.sql.*;
 
 /**
  *
@@ -52,7 +54,19 @@ public class TestePaginacao extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        TesteDuDAO teste = new TesteDuDAO();
+                
+        response.setContentType("text;charset=UTF-8");
+        int pagina = Integer.parseInt(request.getParameter("pag"));
+        try (PrintWriter out = response.getWriter()) {
+            String rst = teste.query(20, ((pagina-1)*20));
+            
+            out.print(rst);
+            out.close();
+        }
+        catch (SQLException e) {
+            System.out.println("vish");
+        }
     }
 
     /**
