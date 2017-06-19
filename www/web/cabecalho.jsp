@@ -7,8 +7,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="assets/ico/favicon.png">
+     <script src="assets/js/jquery-3.2.1.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
 
-    <title>CineData: Consulta 1</title>
+    <title>CineData</title>
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -40,10 +42,10 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="index.jsp">INICIAL</a></li>
-            <li><a href="works.jsp">BUSCA AVANÇADA</a></li>
-            <li class="active"><a href="services.jsp">RANKING</a></li>
-            <li><a href="about.jsp">SOBRE NÓS</a></li>
+            <li id="l1"><a href="index.jsp">INICIAL</a></li>
+            <li id="l2"><a href="query1.jsp">BUSCA AVANÇADA</a></li>
+            <li id = "l3"><a href="query2.jsp">RANKING</a></li>
+            <li id = "l4"><a href="about.jsp">SOBRE NÓS</a></li>
 
           </ul>
         </div><!--/.nav-collapse -->

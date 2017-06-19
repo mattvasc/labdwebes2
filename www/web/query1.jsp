@@ -12,9 +12,7 @@
 		</div><!-- container -->
 	</div><!-- blue wrap -->
 
-
-        
-	<div class="container w">
+        <div class="container w">
             <form>
                 <div class="row centered">
                     <div class="col-lg-6">
@@ -32,26 +30,26 @@
                 
             </form>
 	</div><!-- container -->
-        <%@include file = "rodape.jsp" %>
 
-     <script src="assets/js/jquery-3.2.1.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
     
     <script>
     $(document).ready(function(){
         $.ajax({
-        type: "GET", //Method
+        type: "GET", //Método
         url: "ListaGenero", //Servlet
-        dataType: "json", //Response Type
-        success: function(data) { //Response data
-            
+        dataType: "json", //Tipo do arquivo
+        success: function(data) { //resposta setada
+            //para cada objeto do json, uma nova opcao do combobox
             $.each(data, function(index, value){
                 document.getElementById("comboboxGenero").innerHTML+= "<option value = "+value.genre+">"+value.genre+"</option>";
             });
         }
-      });    
+      });
+      $("#l2").addClass("active");
+      
     });   
     </script>
+<%@include file = "rodape.jsp" %>
         
   </body>
 </html>
