@@ -16,7 +16,6 @@ import Model.Genero;
 import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import javax.servlet.RequestDispatcher;
 /**
  *
  * @author spectrus
@@ -36,34 +35,17 @@ public class ListaGenero extends HttpServlet {
         HttpServletResponse response)
         throws ServletException, IOException {
         // O tipo do retorno vai ser JSON
-//        response.setContentType("application/json");
-//        response.setCharacterEncoding("UTF-8");
-//        // Instanciando o DAO que faz o acesso a persistencia de dados...
-//        GeneroDAO gdao = new GeneroDAO();
-//        // Biblioteca da Google para manipular EDs de java para json
-//        GsonBuilder builder = new GsonBuilder();
-//        Gson gson = builder.create();
-//        //Lista de generos fresquinha do banco...
-//        ArrayList<Genero> generos = gdao.getGeneros();
-//        // Adicionando a lista como JSON no retorno da página
-////        response.getWriter().print(gson.toJson(generos));  
-        
-        int pagina = Integer.parseInt(request.getParameter("pag"));
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        // Instanciando o DAO que faz o acesso a persistencia de dados...
         GeneroDAO gdao = new GeneroDAO();
-        
+        // Biblioteca da Google para manipular EDs de java para json
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
         //Lista de generos fresquinha do banco...
         ArrayList<Genero> generos = gdao.getGeneros();
-        ArrayList<Genero> testeDu = new ArrayList<Genero>();
-        testeDu.add(generos.get((pagina*2)-1));
-        testeDu.add(generos.get(pagina*2));
-        
-        System.out.println(testeDu.get(1).getGenre());
-        
-        request.setAttribute("genero_bean", testeDu);
-        
-        RequestDispatcher dispatcher = null;
-        dispatcher = request.getRequestDispatcher("/testePagination.jsp");
-        dispatcher.forward(request, response);  
+        // Adicionando a lista como JSON no retorno da página
+        response.getWriter().print(gson.toJson(generos));
         
     }
 
@@ -93,22 +75,7 @@ public class ListaGenero extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        int pagina = Integer.parseInt(request.getParameter("pag"));
-        GeneroDAO gdao = new GeneroDAO();
-        
-        //Lista de generos fresquinha do banco...
-        ArrayList<Genero> generos = gdao.getGeneros();
-        
-        ArrayList<Genero> testeDu = new ArrayList<Genero>();
-        testeDu.add(generos.get((pagina*2)-1));
-        testeDu.add(generos.get(pagina*2));
-        
-        request.setAttribute("genero_bean", testeDu);
-        
-        RequestDispatcher dispatcher = null;
-        dispatcher = request.getRequestDispatcher("/testePagination.jsp");
-        dispatcher.forward(request, response);        
+        processRequest(request, response);
     }
 
     /**
