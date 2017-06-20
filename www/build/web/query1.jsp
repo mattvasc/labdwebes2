@@ -11,11 +11,10 @@
 			</div><!-- row -->
 		</div><!-- container -->
 	</div><!-- blue wrap -->
-
-
-        
+      
 	<div class="container w">
             <form method="POST" action="Avancada" id="formulario">
+
                 <div class="row centered">
                     <div class="col-lg-6" id="inputAtores">
                          <label id="ator1"> Ator: <input type ="text" name="ator" id="ator1"> </label> <br />
@@ -39,24 +38,23 @@
                 
             </form>
 	</div><!-- container -->
-        <%@include file = "rodape.jsp" %>
 
-     <script src="assets/js/jquery-3.2.1.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
     
     <script type="text/javascript">
     $(document).ready(function(){
         $.ajax({
-            type: "GET", //Method
-            url: "ListaGenero", //Servlet
-            dataType: "json", //Response Type
-            success: function(data) { //Response data
 
-                $.each(data, function(index, value){
-                    document.getElementById("comboboxGenero").innerHTML+= "<option value = "+value.genre+">"+value.genre+"</option>";
-                });
-            }
-          }); 
+        type: "GET", //Método
+        url: "ListaGenero", //Servlet
+        dataType: "json", //Tipo do arquivo
+        success: function(data) { //resposta setada
+            //para cada objeto do json, uma nova opcao do combobox
+            $.each(data, function(index, value){
+                document.getElementById("comboboxGenero").innerHTML+= "<option value = "+value.genre+">"+value.genre+"</option>";
+            });
+        }
+      });
+      $("#l2").addClass("active");
 
     });   
     
@@ -82,6 +80,7 @@
            $("#formulario").submit();
        }
     </script>
+<%@include file = "rodape.jsp" %>
         
   </body>
 </html>
