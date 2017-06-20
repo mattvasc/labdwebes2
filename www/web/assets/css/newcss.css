@@ -1,4 +1,14 @@
 /*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 19, 2017, 9:32:32 PM
+    Author     : carla
+*/
+
+/*
  * Author: Carlos Alvarez
  * URL: http://alvarez.is
  *
@@ -230,20 +240,28 @@ a:after {
 
 
 /* Footer Wrap */
-#f {
+footer {
 	background: #2d2d2d;
 	padding-top: 30px;
 	padding-bottom: 30px;
+        position: fixed;
+        height: 10%;
+        bottom: 0;
+        width: 100%;
+        
 }
 
-#f i {
+footer i {
 	color: #bdbdbd;
 	font-size: 30px;
 	padding: 20px;
 }
 
-#f i:hover {
+footer i:hover {
 	color: #ff7878;
+}
+footer p {
+    padding-top: 0;
 }
 
 /****** SECTIONS *****/
