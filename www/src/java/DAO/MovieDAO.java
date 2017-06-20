@@ -10,10 +10,10 @@ import java.sql.*;
  *
  * @author porperyus
  */
-public class TesteDuDAO {
+public class MovieDAO {
     private Connection connection;  
   
-    public TesteDuDAO() {
+    public MovieDAO() {
         this.connection = ConnectionFactory.getConnection();        
     } 
     

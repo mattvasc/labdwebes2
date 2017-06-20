@@ -11,14 +11,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import DAO.*;
-import java.sql.*;
 
 /**
  *
- * @author spectrus
+ * @author imsp
  */
-public class TestePaginacao extends HttpServlet {
+public class Avancada extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,14 +29,18 @@ public class TestePaginacao extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text;charset=UTF-8");
-        int pagina = Integer.parseInt(request.getParameter("pag"));
+        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("Algum texto qualquer vindo do Servelet <br />");
-            out.println("pagina "+pagina);
-            out.println("<br />sfdsafdjlh sadfhuiwf sdfhiwf sadfsdfuiasdf");
-         
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Avancada</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Avancada at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -54,19 +56,7 @@ public class TestePaginacao extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        MovieDAO teste = new MovieDAO();
-                
-        response.setContentType("text;charset=UTF-8");
-        int pagina = Integer.parseInt(request.getParameter("pag"));
-        try (PrintWriter out = response.getWriter()) {
-            String rst = teste.query(20, ((pagina-1)*20));
-            
-            out.print(rst);
-            out.close();
-        }
-        catch (SQLException e) {
-            System.out.println("vish");
-        }
+        processRequest(request, response);
     }
 
     /**
