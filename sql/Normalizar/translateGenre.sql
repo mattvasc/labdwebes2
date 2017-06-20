@@ -19,6 +19,7 @@ UPDATE genre SET genre = 'Guerra' WHERE genre = 'War';
 UPDATE genre SET genre = 'Suspense' WHERE genre = 'Thriller';
 UPDATE genre SET genre = 'Ficção Científica' WHERE genre = 'Sci-Fi';
 UPDATE genre SET genre = 'Faroeste' WHERE genre = 'Western';
+UPDATE genre SET genre = 'Investigação' WHERE genre = 'Film-Noir';
 
 
 
