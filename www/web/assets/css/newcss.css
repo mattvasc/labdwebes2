@@ -237,20 +237,6 @@ a:after {
 	color: white;
 }
 
-
-
-/* Footer Wrap */
-footer {
-	background: #2d2d2d;
-	padding-top: 30px;
-	padding-bottom: 30px;
-        position: fixed;
-        height: 10%;
-        bottom: 0;
-        width: 100%;
-        
-}
-
 footer i {
 	color: #bdbdbd;
 	font-size: 30px;
@@ -427,4 +413,51 @@ footer p {
     background: #ff7878;
 }
 
+/* Nossas alterações */
 
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    position: relative;
+    padding-bottom: 6rem;
+    min-height: 100%;
+}/*
+
+*/header {
+    height: 12%;
+}
+
+header #navMain {
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+section {
+    height: 78%;
+}
+
+footer {
+    background: #2d2d2d;    
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    text-align: center;
+}
+
+#blue {
+    padding-top: 7%;
+}
+
+                                                

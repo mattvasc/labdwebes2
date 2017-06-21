@@ -23,38 +23,40 @@
     <body>
         <%@include file="cabecalho.jsp" %>
         
-        <div id="blue">
-            <div class="container">
-                <div class="row centered">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <h4><b>Ranking de Atores Poliglotas</b></h4>
-                        <p>Visualize o ranking de atores que participaram de uma maior quantidade de filmes em idiomas diferentes!.</p>
+        <section id="query2Content">
+            <div id="blue">
+                <div class="container">
+                    <div class="row centered">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <h4><b>Ranking de Atores Poliglotas</b></h4>
+                            <p>Visualize o ranking de atores que participaram de uma maior quantidade de filmes em idiomas diferentes!.</p>
+                        </div>
+                    </div><!-- row -->
+                </div><!-- container -->
+            </div><!-- blue wrap -->
+
+            <div class="container w">
+                <form>
+                    <input type="hidden" name="n_linguas" id="n_linguas">
+                    <div class="row centered" id="sumir1">
+                        <label> <input type="radio" name="linguas" id="todas_as_linguas" value="0" checked="checked"> Mostrar Ranking Completo! </label>
                     </div>
-                </div><!-- row -->
+                    <div class="row centered" id="sumir2">
+                        <div class="col-lg-12">
+                            <label> <input type="radio" name="linguas" id="apenas_x_linguas" value="1"> Filtrar... </label><br />
+                            <div id="qtd"> <label> A partir de: <input id="x" name="x" required type="text" size="2" title="Apenas números por favor!" pattern="^[0-9]+$"> línguas </label> </div>
+
+                        </div>
+                    </div>
+                    <div class="row centered" id="divbotao">
+                        <input type="button" value="Gerar!" onclick="validar()">
+                    </div>
+                    <div id="content">
+
+                    </div>
+                </form>
             </div><!-- container -->
-        </div><!-- blue wrap -->
-
-        <div class="container w">
-            <form>
-                <input type="hidden" name="n_linguas" id="n_linguas">
-                <div class="row centered" id="sumir1">
-                    <label> <input type="radio" name="linguas" id="todas_as_linguas" value="0" checked="checked"> Mostrar Ranking Completo! </label>
-                </div>
-                <div class="row centered" id="sumir2">
-                    <div class="col-lg-12">
-                        <label> <input type="radio" name="linguas" id="apenas_x_linguas" value="1"> Filtrar... </label><br />
-                        <div id="qtd"> <label> A partir de: <input id="x" name="x" required type="text" size="2" title="Apenas números por favor!" pattern="^[0-9]+$"> línguas </label> </div>
-
-                    </div>
-                </div>
-                <div class="row centered" id="divbotao">
-                    <input type="button" value="Gerar!" onclick="validar()">
-                </div>
-                <div id="content">
-
-                </div>
-            </form>
-        </div><!-- container -->
+        </section>
 
         <%@include file="rodape.jsp" %>
 
