@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package DAO;
+import Model.Movie;
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,25 +19,40 @@ public class MovieDAO {
         this.connection = ConnectionFactory.getConnection();        
     } 
     
-    public String query(int limit, int off) throws SQLException {
-        PreparedStatement statement = null;
-        ResultSet rs = null;
-
-        String SQL = "SELECT movieid, title, genre, actorname FROM (SELECT movieid, genre FROM genre WHERE genre = 'Comedy') AS generos INNER JOIN (SELECT movieid, actorname, actorid FROM act INNER JOIN (SELECT actorname, actorid FROM actor WHERE actor.actorname = 'Sandler, Adam (I)') AS ator USING(actorid))  AS bla USING (movieid) INNER JOIN movie USING (movieid) LIMIT "+limit+" OFFSET "+off+";";
-        statement = connection.prepareStatement(SQL);
-        rs = statement.executeQuery();
-        
-        String rst = "";
-        while (rs.next()) {
-            rst += "<tr>";
-            rst += "<td>"+rs.getInt(1)+"</td>";
-            rst += "<td>"+rs.getString(2)+"</td>";
-            rst += "<td>"+rs.getString(3)+"</td>";
-            rst += "<td>"+rs.getString(4)+"</td>";
-            rst += "</tr>";
-        }
-        System.out.println(rst);
-        
-        return rst;
+    public ArrayList getMovie(String GENERO,String A1,String A2,String A3,String A4,String A5){
+    
+          ArrayList<Movie> mv = null;
+          connection = ConnectionFactory.getConnection();
+ 
+            try{
+            
+            CallableStatement call = connection.prepareCall("{call DINAMIC_ACTOR(?,?,?,?,?,?)}");
+            
+            // passando as coisas pra stored procedure
+            call.setString(1,GENERO);
+            call.setString(2,A1);
+            call.setString(3,A2);
+            call.setString(4,A3);
+            call.setString(5,A4);
+            call.setString(6,A5);
+            
+            // executando a query
+            ResultSet rs = call.executeQuery();
+            
+            mv =  new ArrayList<>();
+            
+            while (rs.next()) {
+                    mv.add(new Movie()); // fazer a instanciação direito depois que pegar do bd
+                }
+            
+            }catch (SQLException e){
+            
+                System.out.print("SQL EXCEPTION: " + e.getMessage());
+                mv = null;
+            
+            } finally{
+                return mv;
+            }
+   
     }
 }

@@ -21,6 +21,8 @@ public class Movie {
         this.mvyear = y;
         this.title = t;
     }
+    public Movie(){
+    }
 
     public String getMvyear() {
         return mvyear;
