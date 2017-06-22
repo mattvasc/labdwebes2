@@ -55,7 +55,7 @@ CREATE OR REPLACE FUNCTION public.getactors(
   RETURNS TABLE(actorid integer, actorname text) AS
 $BODY$
 BEGIN
-	RETURN QUERY (SELECT actor.actorid, actor.actorname FROM actor WHERE n_lang >= $1 ORDER BY n_lang DESC, actorname ASC LIMIT $2 OFFSET $3);
+	RETURN QUERY (SELECT actor.actorid, actor.actorname, actor.n_lang FROM actor WHERE n_lang >= $1 ORDER BY n_lang DESC, actorname ASC LIMIT $2 OFFSET $3);
 END
 $BODY$
   LANGUAGE plpgsql VOLATILE;

@@ -14,6 +14,11 @@ public class Actor {
         this.ActorId = ActorId;
         this.ActorName = ActorName;
     }
+    public Actor(int ActorId, String ActorName, int n_lang){
+        this.ActorId = ActorId;
+        this.ActorName = ActorName;
+        this.n_lang = n_lang;
+    }
     
     public int getActorId() {
         return ActorId;
@@ -32,4 +37,13 @@ public class Actor {
     }
     private int ActorId;
     private String ActorName;
+
+    public int getN_lang() {
+        return n_lang;
+    }
+
+    public void setN_lang(int n_lang) {
+        this.n_lang = n_lang;
+    }
+    private int n_lang;
 }

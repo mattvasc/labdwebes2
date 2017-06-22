@@ -18,48 +18,69 @@ public class ActorDAO {
 
     private Connection c;
 
-    public int getQtd(int x) {
+    public int getQtd(int x, int completa) {
         c = ConnectionFactory.getConnection();
         try {
-            PreparedStatement ps = c.prepareStatement("SELECT COUNT(n_lang) FROM actor WHERE n_lang = ?");
+            PreparedStatement ps;
+            if (completa == 0) {
+                ps = c.prepareStatement("SELECT COUNT(n_lang) FROM actor WHERE n_lang = ?");
+            } else {
+                ps = c.prepareStatement("SELECT COUNT(n_lang) FROM actor WHERE n_lang >= ?");
+            }
             ps.setInt(1, x);
-            
+            System.out.println("getQtd, completa = " + completa + ", : " + ps.toString());
+
             ResultSet rs = ps.executeQuery();
             rs.next();
             x = rs.getInt(1);
-            
-            
+
         } catch (SQLException e) {
-            
-            System.out.println("***** Erro no ActorDAO.getQtd(): "+e.getMessage());
+
+            System.out.println("***** Erro no ActorDAO.getQtd(): " + e.getMessage());
             x = -1;
         }
 
         return x;
     }
 
-    public ArrayList getActor(int n_lang, int page_size, int offset) {
+    public ArrayList getActor(int n_lang, int page_size, int offset, int completa) {
         // Lista de retorno de resultados
         ArrayList<Actor> a = null;
         // Cria ou pega a conexao do banco de dados:
         c = ConnectionFactory.getConnection();
         try {
             // Preparando para chamar uma stored procedure do lado de lá...
-            CallableStatement call = c.prepareCall("{call getActors(?,?,?)}");
+            CallableStatement call;
+            if (completa == 0) {
+                call = c.prepareCall("{call getActors(?,?,?)}");
+
+            } else {
+                call = c.prepareCall("{call getActors(?,?,?,?)}");
+                call.setInt(4, 1);
+            }
+
             call.setInt(1, n_lang);
             call.setInt(2, page_size);
             call.setInt(3, offset);
+            System.out.println("getActor, completa = " + completa + ", : " + call.toString());
 
             // executando a query
             ResultSet rs = call.executeQuery();
 
             a = new ArrayList<>();
             // Adicionando o resultado do banco na Arraylist
-            while (rs.next()) {
-                a.add(new Actor(rs.getInt(1), rs.getString(2)));
+            if (completa == 0) { // Nao precisa de n_lang pro front
+                while (rs.next()) {
+                    a.add(new Actor(rs.getInt(1), rs.getString(2)));
+                }
+            } else { // Front precisa do n_lang
+                while (rs.next()) {
+                    a.add(new Actor(rs.getInt(1), rs.getString(2), rs.getInt(3)));
+                }
             }
 
         } catch (SQLException e) {
+            System.out.print("SQL EXCEPTION: " + e.getMessage());
             a = null;
         } finally {
             return a;
