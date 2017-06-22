@@ -100,7 +100,7 @@ a:after {
 }
 
 .navbar-inverse {
-	background: #2d2d2d;
+	background: #000;
 	border-color: #2d2d2d;
 }
 
@@ -447,7 +447,7 @@ section {
 }
 
 footer {
-    background: #2d2d2d;    
+    background: black;    
     position: absolute;
     right: 0;
     bottom: 0;
@@ -469,15 +469,15 @@ footer .container {
     padding-top: 7%;
 }
 
-#radioQuery2 label {
+#divLabel1 label {
     font-size: 168%;
-    padding-bottom: 6%;
+    padding-bottom: 1%;
 }
 
 #buttonQuery2 {
     width: 21%;
     padding: 1.2% 0;
-    margin-top: 2%;
+    margin-top: 5%;
 }
 
 #radioQuery2 #smallLbl {
@@ -492,4 +492,33 @@ footer .container {
 
 #radioQuery2 #labelLang {
     padding-left: 0;
+}
+
+#containAbout {
+    padding-top: 11%;
+}
+
+.navbar-inverse {
+	background: #000;
+	border-color: #2d2d2d;
+}
+
+.navbar-inverse .navbar-nav > .active > a {
+	background: black;
+}
+
+#query2input {
+    margin-bottom: 5%;
+}
+
+#query2input label {
+    padding: 0 5%; 
+}
+
+#divbotao {
+    width: 100%;
+}
+
+#selectQuery2 {
+    padding-left: 5%;
 }

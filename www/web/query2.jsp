@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="wdth=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="shortcut icon" href="assets/ico/favicon.png">
@@ -40,17 +40,54 @@
                 <input type="hidden" name="n_linguas" id="n_linguas">
                 <div class="row" id="sumir">
 
-                    <div class="col-lg-6 col-md-6">
-                        Filtrar entrada:
-
-                        <div class="row">
-                            <div class="col-lg-offset-4 col-lg-4">
+                    <div class="row">
+                        <div id="divLabel1" class="col-lg-offset-2 col-lg-6 col-md-6">
+                            <label>Opções de visualização:</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-offset-2 col-lg-6 col-md-6">
+                            <div class="row" id="query2input">
                                 <label> 
-                                    <input type="radio" name="linguas" id="todas_as_linguas" value="0" checked="checked"> 
-                                    Mostrar Ranking Completo! 
+                                    <input type="radio" name="ranking_completo" id="ranking_completo_0" value="0" checked="checked"> 
+                                    Ranking Agrupado 
+                                </label>
+                                <label> 
+                                    <input type="radio" name="ranking_completo" id="ranking_completo_1" value="1"> 
+                                    Ranking Tradicional 
                                 </label>
                             </div>
                         </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div id="divLabel1" class="col-lg-offset-2 col-lg-6 col-md-6">
+                            <label>Opções de Ranking</label>
+                        </div>
+                    </div>
+                    <div class="row" id="selectQuery2">
+                        <div class="col-lg-offset-2 col-lg-7 col-md-7">
+                            <div class="row">
+                                <select multiple class="form-control">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+<!--                    <div class="row">
+                        <div class="col-lg-offset-4 col-lg-4">
+                            <label> 
+                                <input type="radio" name="linguas" id="todas_as_linguas" value="0" checked="checked"> 
+                                Mostrar Ranking Completo! 
+                            </label>
+                        </div>
+                    </div>
                         <div class="row" >
                             <div class="col-lg-offset-4 col-lg-2">
                                 <label> 
@@ -68,13 +105,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        Opções de visualização:
-                        <div class="row"><label> <input type="radio" name="ranking_completo" id="ranking_completo_0" value="0" checked="checked"> Ranking Agrupado </label></div>
-                        <div class="row">    <label> <input type="radio" name="ranking_completo" id="ranking_completo_1" value="1"> Ranking Tradicional </label></div>
-
-                    </div>
+                    </div>-->                    
                 </div>
                 <div id="content" class="row">
 
@@ -222,7 +253,7 @@
 
                                     $.each(data, function (index, value) {
                                         //Criando os botões de colapso:
-                                        $('#content').append("  <div class='row'><button data-toggle='collapse' data-target='#collapso-" + value + "'> Mostrar Ranking " + value + " </button> <div class='collapse' id='collapso-" + value + "'> <div  id='content-" + value + "'> Carregando... </div><div id='pag-" + value + "'> </div></div> </div>");
+                                        $('#content').append("  <div class='row'><button class='btn btn-default' data-toggle='collapse' data-target='#collapso-" + value + "'> Mostrar Ranking " + value + " </button> <div class='collapse' id='collapso-" + value + "'> <div  id='content-" + value + "'> Carregando... </div><div id='pag-" + value + "'> </div></div> </div>");
                                         $.get("/Ranking?criar=0&completa=0&n_lang=" + value, function (quantidade_de_atores_na_pagina) {
                                             if (quantidade_de_atores_na_pagina > limite) {
                                                 $('#pag-' + value).pagination({
