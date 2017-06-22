@@ -45,7 +45,7 @@ $b$ LANGUAGE plpgsql;
 
 -- Function: public.getactors(integer, integer, integer)
 
--- DROP FUNCTION public.getactors(integer, integer, integer);
+DROP FUNCTION public.getactors(integer, integer, integer);
 
 CREATE OR REPLACE FUNCTION public.getactors(
     IN integer,
