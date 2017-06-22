@@ -43,3 +43,24 @@ BEGIN
 END
 $b$ LANGUAGE plpgsql;
 
+-- Function: public.getactors(integer, integer, integer)
+
+-- DROP FUNCTION public.getactors(integer, integer, integer);
+
+CREATE OR REPLACE FUNCTION public.getactors(
+    IN integer,
+    IN integer,
+    IN integer,
+    IN integer)
+  RETURNS TABLE(actorid integer, actorname text) AS
+$BODY$
+BEGIN
+	RETURN QUERY (SELECT actor.actorid, actor.actorname FROM actor WHERE n_lang >= $1 ORDER BY n_lang DESC, actorname ASC LIMIT $2 OFFSET $3);
+END
+$BODY$
+  LANGUAGE plpgsql VOLATILE;
+  
+ALTER FUNCTION public.getactors(integer, integer, integer)
+  OWNER TO aluno;
+ALTER FUNCTION public.getactors(integer, integer, integer, integer)
+  OWNER TO aluno;
