@@ -59,12 +59,12 @@ public class TestePaginacao extends HttpServlet {
         response.setContentType("text;charset=UTF-8");
         int pagina = Integer.parseInt(request.getParameter("pag"));
         try (PrintWriter out = response.getWriter()) {
-            String rst = teste.query(20, ((pagina-1)*20));
+          //  String rst = teste.query(20, ((pagina-1)*20));
             
-            out.print(rst);
+          //  out.print(rst);
             out.close();
         }
-        catch (SQLException e) {
+        catch (Exception e) {
             System.out.println("vish");
         }
     }
