@@ -1,9 +1,21 @@
+DROP INDEX IF EXISTS actor_index_id;
+
+CREATE UNIQUE INDEX actor_index_id
+  ON public.actor
+  USING btree
+  (actorid)
+  WITH (FILLFACTOR=100);
+
+
+
+DROP INDEX IF EXISTS actor_index_nlang;
+
 CREATE INDEX actor_index_nlang
   ON public.actor
   USING btree
   (n_lang)
   WITH (FILLFACTOR=100);
-
+ALTER TABLE public.actor CLUSTER ON actor_index_nlang;
 
 
 
