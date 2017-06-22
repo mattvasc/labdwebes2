@@ -36,20 +36,35 @@
             </div><!-- blue wrap -->
 
             <div class="container w">
-                <form>
+                <form id="radioQuery2">
                     <input type="hidden" name="n_linguas" id="n_linguas">
-                    <div class="row centered" id="sumir1">
-                        <label> <input type="radio" name="linguas" id="todas_as_linguas" value="0" checked="checked"> Mostrar Ranking Completo! </label>
+                    <div class="row" id="sumir1">
+                        <div class="col-lg-offset-4 col-lg-4">
+                            <label> 
+                                <input type="radio" name="linguas" id="todas_as_linguas" value="0" checked="checked"> 
+                                Mostrar Ranking Completo! 
+                            </label>
+                        </div>
                     </div>
-                    <div class="row centered" id="sumir2">
-                        <div class="col-lg-12">
-                            <label> <input type="radio" name="linguas" id="apenas_x_linguas" value="1"> Filtrar... </label><br />
-                            <div id="qtd"> <label> A partir de: <input id="x" name="x" required type="text" size="2" title="Apenas números por favor!" pattern="^[0-9]+$"> línguas </label> </div>
-
+                    <div class="row" id="sumir2">
+                        <div class="col-lg-offset-4 col-lg-2">
+                            <label> 
+                                <input type="radio" name="linguas" id="apenas_x_linguas" value="1">
+                                Filtrar... 
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-offset-4 col-lg-4">
+                            <div id="qtd"> 
+                                <div id="labelFrst" class="col-lg-4"><label id="smallLbl"> A partir de: </label></div>
+                                <div class="col-lg-4"><input class="form-control" id="x" name="x" required type="text" size="2" title="Apenas números por favor!" pattern="^[0-9]+$"></div>
+                                <div id="labelLang" class="col-lg-3"><label id="smallLbl">línguas</label></div>
+                            </div>
                         </div>
                     </div>
                     <div class="row centered" id="divbotao">
-                        <input type="button" value="Gerar!" onclick="validar()">
+                        <input id="buttonQuery2" class="btn btn-primary" type="button" value="Gerar!" onclick="validar()">
                     </div>
                     <div id="content">
 
