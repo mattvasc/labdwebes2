@@ -35,11 +35,19 @@
                 </div><!-- container -->
             </div><!-- headerwrap -->
         </section>
+        
+        <section class="slides">
+            <iframe
+                src="//slides.com/mattvasc/cinedata-1/embed" scrolling="no" frameborder="0" 
+                webkitallowfullscreen mozallowfullscreen allowfullscreen id="iframeHome">
+            </iframe>
+        </section>
 
         <%@include file = "rodape.jsp" %>    
         <script>
+            document.getElementById("footer").style.position = "static";
             $(document).ready(function(){
-                $("#l1").addClass("active");      
+                $("#l1").addClass("active");                
             });   
         </script>
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
