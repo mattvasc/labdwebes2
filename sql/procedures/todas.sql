@@ -7,8 +7,6 @@ CREATE INDEX actor_index_nlang
 
 
 
-
-
 DROP FUNCTION IF EXISTS public.getgenres();
 
 CREATE OR REPLACE FUNCTION public.getgenres()
@@ -44,7 +42,7 @@ $b$ LANGUAGE plpgsql;
 
 -- Function: public.getactors(integer, integer, integer)
 
-DROP FUNCTION IF EXISTS public.getactors(integer, integer, integer);
+DROP FUNCTION IF EXISTS public.getactors(integer, integer, integer, integer);
 
 CREATE OR REPLACE FUNCTION public.getactors(
     IN integer,
@@ -64,9 +62,7 @@ ALTER FUNCTION public.getactors(integer, integer, integer)
 ALTER FUNCTION public.getactors(integer, integer, integer, integer)
   OWNER TO aluno;
 
-
-
-DROP FUNCTION IF EXISTS public.getnlang(integer);
+  
 DROP FUNCTION IF EXISTS public.getnlang(integer, integer);
 
 CREATE OR REPLACE FUNCTION public.getnlang(IN integer, IN integer)
@@ -86,7 +82,6 @@ ALTER FUNCTION public.getnlang(integer, integer)
 
 
 -- Function: public.getactors(integer, integer, integer, integer)
-
 DROP FUNCTION IF EXISTS public.getactors(integer, integer, integer, integer);
 CREATE OR REPLACE FUNCTION public.getactors(
     IN integer,
