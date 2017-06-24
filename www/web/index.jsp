@@ -20,7 +20,7 @@
         <link href="assets/css/newcss.css" rel="stylesheet">
     </head>
     
-    <body>
+    <body id="bodyHome">
         <%@include file= "cabecalho.jsp" %>
 	
         <section class="imgHome">
