@@ -19,17 +19,8 @@ $BODY$
   LANGUAGE sql VOLATILE
   COST 100
   ROWS 1000;
+ALTER FUNCTION getgenres() OWNER TO aluno;
 
-
-
-
-
-DROP FUNCTION IF EXISTS getNLang(int);
-CREATE OR REPLACE FUNCTION getNLang(int) RETURNS TABLE (lang int) AS $$
-BEGIN
-	RETURN QUERY (SELECT DISTINCT n_lang FROM actor WHERE n_lang >= $1 ORDER BY n_lang DESC);
-END
-$$ LANGUAGE plpgsql;
 
 
 
@@ -53,7 +44,7 @@ $b$ LANGUAGE plpgsql;
 
 -- Function: public.getactors(integer, integer, integer)
 
-DROP FUNCTION public.getactors(integer, integer, integer);
+DROP FUNCTION IF EXISTS public.getactors(integer, integer, integer);
 
 CREATE OR REPLACE FUNCTION public.getactors(
     IN integer,
@@ -72,3 +63,47 @@ ALTER FUNCTION public.getactors(integer, integer, integer)
   OWNER TO aluno;
 ALTER FUNCTION public.getactors(integer, integer, integer, integer)
   OWNER TO aluno;
+
+
+
+DROP FUNCTION IF EXISTS public.getnlang(integer);
+DROP FUNCTION IF EXISTS public.getnlang(integer, integer);
+
+CREATE OR REPLACE FUNCTION public.getnlang(IN integer, IN integer)
+  RETURNS TABLE(lang integer) AS
+$BODY$
+BEGIN
+	RETURN QUERY (SELECT DISTINCT n_lang FROM actor WHERE n_lang >= $1 AND n_lang <= $2 ORDER BY n_lang DESC);
+END
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION public.getnlang(integer, integer)
+  OWNER TO aluno;
+
+
+
+
+-- Function: public.getactors(integer, integer, integer, integer)
+
+DROP FUNCTION IF EXISTS public.getactors(integer, integer, integer, integer);
+CREATE OR REPLACE FUNCTION public.getactors(
+    IN integer,
+    IN integer,
+    IN integer,
+    IN integer)
+  RETURNS TABLE(actorid integer, actorname text, lang_n integer) AS
+$BODY$
+BEGIN
+	RETURN QUERY (SELECT actor.actorid, actor.actorname, actor.n_lang FROM actor WHERE n_lang >= $1 AND n_lang <= $2 ORDER BY n_lang DESC, actorname ASC LIMIT $3 OFFSET $4);
+END
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION public.getactors(integer, integer, integer, integer)
+  OWNER TO aluno;
+
+
+

@@ -50,66 +50,96 @@ public class Ranking extends HttpServlet {
         
         
          */
-        
-        
         //Instanciando o baguio da gugou que gera Gson
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
-        
+
         //Avisando o tipo da resposta:
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
+        String opcao = request.getParameter("opcao");
+        if (opcao != null) {
+            switch (opcao) {
+                // Retorna 10 filmes que aquele ator fez
+                case "top10":
+                    Actor a = new Actor(Integer.parseInt(request.getParameter("act_id")));
+                    MovieDAO mv = new MovieDAO();
+                    ArrayList<Movie> result;
+                    result = mv.getTopTenMovie(a);
+                    response.getWriter().print(gson.toJson(result));
 
-        if (request.getParameter("act_id") != null) {
-
-            Actor a = new Actor(Integer.parseInt(request.getParameter("act_id")));
-            MovieDAO mv = new MovieDAO();
-            ArrayList<Movie> result;
-            result = mv.getTopTenMovie(a);
-            response.getWriter().print(gson.toJson(result));
-
-        } else {
-            int n_lang;
-
-            if (request.getParameter("n_lang") == null) {
-                n_lang = 0;
-            } else {
-                n_lang = Integer.parseInt(request.getParameter("n_lang"));
-            }
-
-            // Retorna um vetor numérico das páginas que devem ser criadas... {32, 29, 28, 27, ..., X }
-            if (request.getParameter("criar").equals("1")) {
-
-                ArrayList<Integer> qtd = aDAO.getNLang(n_lang);
-                response.getWriter().print(gson.toJson(qtd));
-
-            } else if (request.getParameter("criar").equals("0")) {
-
-                // Retorna o tamanho daquela paginação dos atores que falam "n_lang" idiomas.
-                if (request.getParameter("limit") == null) {
+                    break;
+                // Retorna o inteiro de qtd de atores
+                case "qtd":
                     int qtd;
                     if (request.getParameter("completa").equals("0")) {
-                        qtd = aDAO.getQtd(n_lang, 0);
+                        qtd = aDAO.getQtd(Integer.parseInt(request.getParameter("n_lang")));
                     } else {
-                        qtd = aDAO.getQtd(n_lang, 1);
+                        qtd = aDAO.getQtd(Integer.parseInt(request.getParameter("n_lang_min")), Integer.parseInt(request.getParameter("n_lang_max")));
                     }
-
                     response.getWriter().print(gson.toJson(qtd));
-                } else {
-                    // Retorna uma porção do conjunto dos personagens solicitados
+                    break;
+                //Retorna a pagina solicitada
+                case "pagina":
+                    int limite = Integer.parseInt(request.getParameter("limit"));
+                    int offset = Integer.parseInt(request.getParameter("offset"));
+                    ArrayList<Actor> acts = null;
                     if ("0".equals(request.getParameter("completa"))) {/* Paginacao Agrupada */
-                        ArrayList<Actor> acts = aDAO.getActor(n_lang, Integer.parseInt(request.getParameter("limit")), Integer.parseInt(request.getParameter("offset")), 0);
-                        response.getWriter().print(gson.toJson(acts));
+                        int nlang;
+                        if (request.getParameter("n_lang") == null) {
+                            System.out.println("É nulo!!!!!!!");
+                            nlang = 1;
+                        } else {
+                            nlang = Integer.parseInt(request.getParameter("n_lang"));
+                            System.out.println(nlang);
+
+                        }
+                        acts = aDAO.getActor(nlang, limite, offset);
                     } else {
-                        ArrayList<Actor> acts = aDAO.getActor(n_lang, Integer.parseInt(request.getParameter("limit")), Integer.parseInt(request.getParameter("offset")), 1);
-                        response.getWriter().print(gson.toJson(acts));
+                        /*Paginacao Completa!*/
+
+                        int nlangmin;
+                        int nlangmax;
+                        if (request.getParameter("n_lang_min") == null) {
+                            System.out.println("É nulo!!!!!!!");
+                            nlangmin = 1;
+                        } else {
+                            String s = request.getParameter("n_lang_min");
+                            System.out.println(s);
+                            nlangmin = Integer.valueOf(s);
+                        }
+                        if (request.getParameter("n_lang_max") == null) {
+                            System.out.println("É nulo!!!!!!!");
+                            nlangmax = 1;
+                        } else {
+                            nlangmax = Integer.valueOf(request.getParameter("n_lang_max"));
+                        }
+
+                        acts = aDAO.getActor(nlangmin, nlangmax, limite, offset);
                     }
-                }
+                    response.getWriter().print(gson.toJson(acts));
+
+                    break;
+                // Retorna um vetor numérico das páginas que devem ser criadas... {32, 29, 28, 27, ..., X } 
+                case "quaispaginas": // agrupada only
+                    int min = Integer.parseInt(request.getParameter("n_lang_min"));
+                    int max = Integer.parseInt(request.getParameter("n_lang_max"));
+
+                    ArrayList<Integer> nlangs = aDAO.getNLang(min, max);
+                    response.getWriter().print(gson.toJson(nlangs));
+                    break;
+                default:
+                    response.getWriter().print("[\"Opção Invalida!\"]");
+                    break;
             }
+        } else {
+            response.getWriter().print("[\"Falta fornecer a opção!\"]");
+
         }
+
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
