@@ -14,6 +14,9 @@ public class Actor {
         this.ActorId = ActorId;
         this.ActorName = ActorName;
     }
+    public Actor (int id){
+        this.ActorId = id;
+    }
     public Actor(int ActorId, String ActorName, int n_lang){
         this.ActorId = ActorId;
         this.ActorName = ActorName;

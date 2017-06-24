@@ -10,18 +10,26 @@ package Model;
  * @author imsp
  */
 public class Movie {
-    
+
+    private int movieid;
     private String mvyear;
     private Genero[] genre;
     private String title;
     private Lang[] lang;
     private Director[] director;
-    
-    public Movie(String y,String t){
+
+    public Movie(String y, String t) {
         this.mvyear = y;
         this.title = t;
     }
-    public Movie(){
+
+    public Movie(int id, String t, String y) {
+        this.movieid = id;
+        this.title = t;
+        this.mvyear = y;
+    }
+
+    public Movie() {
     }
 
     public String getMvyear() {
@@ -63,7 +71,5 @@ public class Movie {
     public void setDirector(Director[] director) {
         this.director = director;
     }
-    
-    
-    
+
 }

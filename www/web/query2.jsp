@@ -50,184 +50,220 @@
                             <label> <input  type="checkbox" name="apartir"> E Até: <input size="3" type="text" placeholder="32"> Idiomas.</label>
                         </div>
                     </div>
-                
-                <div class="col-lg-6 col-md-6">
-                    Opções de visualização:
-                    <div class="row"><label> <input type="radio" name="ranking_completo" id="ranking_completo_0" value="0" checked="checked"> Ranking Agrupado </label></div>
-                    <div class="row">    <label> <input type="radio" name="ranking_completo" id="ranking_completo_1" value="1"> Ranking Tradicional </label></div>
+
+                    <div class="col-lg-6 col-md-6">
+                        Opções de visualização:
+                        <div class="row"><label> <input type="radio" name="ranking_completo" id="ranking_completo_0" value="0" checked="checked"> Ranking Agrupado </label></div>
+                        <div class="row">    <label> <input type="radio" name="ranking_completo" id="ranking_completo_1" value="1"> Ranking Tradicional </label></div>
+
+                    </div>
+                </div>
+
+                <div id="myModal" class="modal">
+
+                    <!-- Modal content -->
+                    <div id="modal-content" class="modal-content">
+
+
+                    </div>
 
                 </div>
-            </div>
-            <div id="content" class="row">
+                <div id="content" class="row">
 
-            </div>
-            <div class="row centered" id="divbotao">
-                <input id="buttonQuery2" class="btn btn-primary" type="button" value="Gerar!" onclick="validar()">
-            </div>
+                </div>
+                <div class="row centered" id="divbotao">
+                    <input id="buttonQuery2" class="btn btn-primary" type="button" value="Gerar!" onclick="validar()">
+                </div>
 
-        </div><!-- container -->
-    </section>
+            </div><!-- container -->
+        </section>
 
-    <%@include file="rodape.jsp" %>
+        <%@include file="rodape.jsp" %>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
 
-    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-    <link href="assets/css/simplePagination.css" rel="stylesheet">
-    <script type="text/javascript" src="assets/js/jquery.simplePagination.js"></script>
+        <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+        <link href="assets/css/simplePagination.css" rel="stylesheet">
+        <script type="text/javascript" src="assets/js/jquery.simplePagination.js"></script>
 
-    <script type="text/javascript">
+        <script type="text/javascript">
 
-                    $(document).ready(function () {
-                       /* $("#x").keypress(function (e) {
-                            if (e.which == 13) {
-                                validar();
-                            }
-                        });*/
-                        $("#l3").addClass("active");
-                        $('#qtd').hide();
-                        $('input:radio[name="linguas"]').change(function () {
-                            if ($(this).val() == '1') {
-                                $("#qtd").show();
-                            } else {
-                                $('#qtd').hide();
+                        $(document).ready(function () {
+                            modal = document.getElementById('myModal');
+                            $("#l3").addClass("active");
+                            $('#qtd').hide();
+                            $('input:radio[name="linguas"]').change(function () {
+                                if ($(this).val() == '1') {
+                                    $("#qtd").show();
+                                } else {
+                                    $('#qtd').hide();
+                                }
+                            });
+
+
+                            // When the user clicks anywhere outside of the modal, close it
+                            window.onclick = function (event) {
+                                if (event.target == modal) {
+                                    modal.style.display = "none";
+                                }
                             }
                         });
-                    });
 
-                    // Verifica entrada
-                    function isInt(value) {
-                        var x;
-                        if (isNaN(value)) {
-                            return false;
+                        // Verifica entrada
+                        function isInt(value) {
+                            var x;
+                            if (isNaN(value)) {
+                                return false;
+                            }
+                            x = parseFloat(value);
+                            return (x | 0) === x;
                         }
-                        x = parseFloat(value);
-                        return (x | 0) === x;
-                    }
-                    // Linda função recursiva
+                        // Linda função recursiva
 
-                    // Roda quando a pessoa clica em Gerar!
-                    function validar() {
-                     /*   if (document.getElementById('apenas_x_linguas').checked) {
-                            if (isInt($("#x").val()))
-                                $("#n_linguas").val($("#x").val());
-                            else {
-                                alert("Insira uma entrada válida!");
+                        // Roda quando a pessoa clica em Gerar!
+                        function validar() {
+                            /*   if (document.getElementById('apenas_x_linguas').checked) {
+                             if (isInt($("#x").val()))
+                             $("#n_linguas").val($("#x").val());
+                             else {
+                             alert("Insira uma entrada válida!");
+                             return;
+                             }
+                             } else if (document.getElementById('todas_as_linguas').checked) {*/
+                            $("#n_linguas").val('1');
+                            /* } else {
+                             return;
+                             }*/
+
+                            if (document.getElementById('ranking_completo_1').checked)
+                            {
+                                paginacao_completa($("#n_linguas").val(), 25);
+                            } else if (document.getElementById('ranking_completo_0').checked)
+                            {
+                                paginacao_agrupada($("#n_linguas").val(), 10);
+                            } else {
                                 return;
                             }
-                        } else if (document.getElementById('todas_as_linguas').checked) {*/
-                            $("#n_linguas").val('1');
-                       /* } else {
-                            return;
-                        }*/
-
-                        if (document.getElementById('ranking_completo_1').checked)
-                        {
-                            paginacao_completa($("#n_linguas").val(), 25    );
-                        } else if (document.getElementById('ranking_completo_0').checked)
-                        {
-                            paginacao_agrupada($("#n_linguas").val(), 10);
-                        } else {
-                            return;
-                        }
-                        // cometário
-                        $("#sumir").hide();
-                        $("#divbotao").html('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>Carregando informações! ');
+                            // cometário
+                            $("#sumir").hide();
+                            $("#divbotao").html('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>Carregando informações! ');
 
 
-                    }
-
-                    function paginacao_completa(value, limite) {
-                        function addConteudo(pagina) {
-                            document.getElementById('content-geral').innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>Carregando informações! '; // Carregando...
-                            $.get("/Ranking?criar=0&completa=1&n_lang=" + value + "&limit=" + limite + "&offset=" + ((pagina - 1) * limite), function (array_de_atores) {
-                                $('#content-geral').html("");
-                                $.each(array_de_atores, function (index, ator) {
-                                    document.getElementById('content-geral').innerHTML += (index + 1) + limite * (-1 + pagina) + ". " + ator.ActorName + " - (" + ator.n_lang + " idiomas) <br />";
-                                });
-                            });
-                        }
-                        $('#content').html("<div id='content-geral'></div> <div id='pag-geral'></div> ");
-                        $.get("/Ranking?criar=0&completa=1&n_lang=" + value, function (quantidade_de_atores_no_total) {
-                            $("#divbotao").html(' <input class="btn btn-primary" type="button" value="Novo Ranking!" onclick="window.location = window.location.pathname;">');
-                            $('#pag-geral').pagination({
-                                items: quantidade_de_atores_no_total,
-                                itemsOnPage: limite,
-                                hrefTextPrefix: "#pag",
-                                onInit: function () {
-                                    $('#content-geral').css("min-height", "10em");
-                                    $('#content-geral').css("font-size", "1em");
-                                },
-                                onPageClick: function (pageNumber) {
-                                    addConteudo(pageNumber);
-                                }
-
-                            });
-                            addConteudo(1); // Init
-                        });
-                    }
-
-                    function paginacao_agrupada(n_linguas, limite) {
-                        /*Declaração de funções usadas*/
-                        function carregar(n_lang, limit) { // da init nas paginas dos rankinhos
-                            if (n_lang > 0 && document.getElementById('pag-' + n_lang)) {
-                                addConteudo(n_lang, 1);
-                                carregar(n_lang - 1, limit);
-
-                            } else if (n_lang > 0) {
-                                carregar(n_lang - 1, limit);
-                            }
                         }
 
-                        function addConteudo(n_lang, pagina) {
-                            document.getElementById('content-' + n_lang).innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>Carregando informações! '; // Carregando...
-                            $.get("/Ranking?criar=0&completa=0&n_lang=" + n_lang + "&limit=" + limite + "&offset=" + ((pagina - 1) * limite), function (array_de_atores) {
-                                document.getElementById('content-' + n_lang).innerHTML = "";
-                                $.each(array_de_atores, function (index, ator) {
-                                    document.getElementById('content-' + n_lang).innerHTML += (index + 1) + limite * (pagina - 1) + ". " + ator.ActorName + "<br />";
-                                });
-                            });
-                        }
-                        // Itens por pagina:
-                        $.ajax({
-                            type: "GET",
-                            url: "Ranking?criar=1&n_lang=" + n_linguas + "&completa=0",
-                            dataType: "json",
-                            timeout: 5000,
-                            error: function () {
-                                alert("Tempo esgotado!");
-                            },
-                            success: function (data) {
-                                $("#divbotao").html(' <input class="btn btn-primary" type="button" value="Novo Ranking!" onclick="window.location = window.location.pathname;">');
-
-                                $.each(data, function (index, value) {
-                                    //Criando os botões de colapso:
-                                    $('#content').append("  <div class='row'><button data-toggle='collapse' data-target='#collapso-" + value + "'> Mostrar Ranking " + value + " </button> <div class='collapse' id='collapso-" + value + "'> <div  id='content-" + value + "'> Carregando... </div><div id='pag-" + value + "'> </div></div> </div>");
-                                    $.get("/Ranking?criar=0&completa=0&n_lang=" + value, function (quantidade_de_atores_na_pagina) {
-                                        if (quantidade_de_atores_na_pagina > limite) {
-                                            $('#pag-' + value).pagination({
-                                                items: quantidade_de_atores_na_pagina,
-                                                itemsOnPage: limite,
-                                                hrefTextPrefix: "#pag",
-                                                onInit: function () {
-                                                    $('#content-' + value).css("min-height", "10em");
-                                                    $('#content-' + value).css("font-size", "1em");
-                                                },
-                                                onPageClick: function (pageNumber) {
-                                                    addConteudo(value, pageNumber);
-                                                }
-                                            });
-                                        }
+                        function paginacao_completa(value, limite) {
+                            function addConteudo(pagina) {
+                                document.getElementById('content-geral').innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>Carregando informações! '; // Carregando...
+                                $.get("/Ranking?criar=0&completa=1&n_lang=" + value + "&limit=" + limite + "&offset=" + ((pagina - 1) * limite), function (array_de_atores) {
+                                    $('#content-geral').html("");
+                                    $.each(array_de_atores, function (index, ator) {
+                                        document.getElementById('content-geral').innerHTML += "<tag style='cursor: pointer;' onclick='mostrar_modal(" + ator.ActorId + ", \"" + ator.ActorName + "\")'>" + ((index + 1) + limite * (-1 + pagina)) + ". " + ator.ActorName + " - (" + ator.n_lang + " idiomas)</tag> <br />";
                                     });
                                 });
-                                // init vem aqui //
-
-                                carregar(32, limite);
                             }
-                        });
-                    }
-    </script>
-</body>
+                            $('#content').html("<div id='content-geral'></div> <div id='pag-geral'></div> ");
+                            $.get("/Ranking?criar=0&completa=1&n_lang=" + value, function (quantidade_de_atores_no_total) {
+                                $("#divbotao").html(' <input class="btn btn-primary" type="button" value="Novo Ranking!" onclick="window.location = window.location.pathname;">');
+                                $('#pag-geral').pagination({
+                                    items: quantidade_de_atores_no_total,
+                                    itemsOnPage: limite,
+                                    hrefTextPrefix: "#pag",
+                                    onInit: function () {
+                                        $('#content-geral').css("min-height", "10em");
+                                        $('#content-geral').css("font-size", "1em");
+                                    },
+                                    onPageClick: function (pageNumber) {
+                                        addConteudo(pageNumber);
+                                    }
+
+                                });
+                                addConteudo(1); // Init
+                            });
+                        }
+                        function mostrar_modal(act_id, act_name) {
+                            // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal
+                            console.log(act_id);
+
+                            $.get('https://api.themoviedb.org/3/search/person?api_key=088e7711438e5b1544142df8f44709de&query=' + encodeURI(act_name), function (json) {
+                                modal.style.display = "block";
+                                $stringona = "<div class='col-md-2 col-lg-2'><img alt='" + act_name + "' src='https://image.tmdb.org/t/p/w92/" + json.results[0].profile_path + "'></img> </div>"
+                                        + "<div class='col-md-10 col-lg-10'> <div class='row'><h1>" + act_name + ":</h1></div><div class='row'> <h3> Trabalhou em:</h3> </div> <div id='movies_feitos'>  <i class='fa fa-spinner fa-spin' style='font-size:24px'></i>Carregando informações! </div> </div>";
+                                $('#modal-content').html($stringona);
+                                $url = '/Ranking?act_id=' + act_id;
+                                console.log($url);
+                                $.get($url, function (movies) {
+                                    $("#movies_feitos").html("<ul>")
+                                    $.each(movies, function (index, movie) {
+                                        $("#movies_feitos").append("<li>"+movie.title+"</li>");
+                                    });
+                                    $("#movies_feitos").append("</ul>")
+
+                                });
+                            });
+
+                        }
+
+                        function paginacao_agrupada(n_linguas, limite) {
+                            /*Declaração de funções usadas*/
+                            function carregar(n_lang, limit) { // da init nas paginas dos rankinhos
+                                if (n_lang > 0 && document.getElementById('pag-' + n_lang)) {
+                                    addConteudo(n_lang, 1);
+                                    carregar(n_lang - 1, limit);
+
+                                } else if (n_lang > 0) {
+                                    carregar(n_lang - 1, limit);
+                                }
+                            }
+
+                            function addConteudo(n_lang, pagina) {
+                                document.getElementById('content-' + n_lang).innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>Carregando informações! '; // Carregando...
+                                $.get("/Ranking?criar=0&completa=0&n_lang=" + n_lang + "&limit=" + limite + "&offset=" + ((pagina - 1) * limite), function (array_de_atores) {
+                                    document.getElementById('content-' + n_lang).innerHTML = "";
+                                    $.each(array_de_atores, function (index, ator) {
+                                        document.getElementById('content-' + n_lang).innerHTML += (index + 1) + limite * (pagina - 1) + ". " + ator.ActorName + "<br />";
+                                    });
+                                });
+                            }
+                            // Itens por pagina:
+                            $.ajax({
+                                type: "GET",
+                                url: "Ranking?criar=1&n_lang=" + n_linguas + "&completa=0",
+                                dataType: "json",
+                                timeout: 5000,
+                                error: function () {
+                                    alert("Tempo esgotado!");
+                                },
+                                success: function (data) {
+                                    $("#divbotao").html(' <input class="btn btn-primary" type="button" value="Novo Ranking!" onclick="window.location = window.location.pathname;">');
+
+                                    $.each(data, function (index, value) {
+                                        //Criando os botões de colapso:
+                                        $('#content').append("  <div class='row'><button data-toggle='collapse' data-target='#collapso-" + value + "'> Mostrar Ranking " + value + " </button> <div class='collapse' id='collapso-" + value + "'> <div  id='content-" + value + "'> Carregando... </div><div id='pag-" + value + "'> </div></div> </div>");
+                                        $.get("/Ranking?criar=0&completa=0&n_lang=" + value, function (quantidade_de_atores_na_pagina) {
+                                            if (quantidade_de_atores_na_pagina > limite) {
+                                                $('#pag-' + value).pagination({
+                                                    items: quantidade_de_atores_na_pagina,
+                                                    itemsOnPage: limite,
+                                                    hrefTextPrefix: "#pag",
+                                                    onInit: function () {
+                                                        $('#content-' + value).css("min-height", "10em");
+                                                        $('#content-' + value).css("font-size", "1em");
+                                                    },
+                                                    onPageClick: function (pageNumber) {
+                                                        addConteudo(value, pageNumber);
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    });
+                                    // init vem aqui //
+
+                                    carregar(32, limite);
+                                }
+                            });
+                        }
+        </script>
+    </body>
 </html>
