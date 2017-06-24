@@ -101,8 +101,6 @@
                                     $('#qtd').hide();
                                 }
                             });
-
-
                             // When the user clicks anywhere outside of the modal, close it
                             window.onclick = function (event) {
                                 if (event.target == modal) {
@@ -110,7 +108,6 @@
                                 }
                             }
                         });
-
                         // Verifica entrada
                         function isInt(value) {
                             var x;
@@ -149,8 +146,6 @@
                             // cometário
                             $("#sumir").hide();
                             $("#divbotao").html('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>Carregando informações! ');
-
-
                         }
 
                         function paginacao_completa(value, limite) {
@@ -185,10 +180,15 @@
                         function mostrar_modal(act_id, act_name) {
                             // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal
                             console.log(act_id);
-
                             $.get('https://api.themoviedb.org/3/search/person?api_key=088e7711438e5b1544142df8f44709de&query=' + encodeURI(act_name), function (json) {
                                 modal.style.display = "block";
-                                $stringona = "<div class='col-md-2 col-lg-2'><img alt='" + act_name + "' src='https://image.tmdb.org/t/p/w92/" + json.results[0].profile_path + "'></img> </div>"
+                                $stringona = "<div class='col-md-2 col-lg-2'><img alt='" + act_name + "' src='";
+                                if (json.results[0] && json.results[0].profile_path) { // Se o personagem tem imagem:
+                                    $stringona = $stringona + "https://image.tmdb.org/t/p/w92/" + json.results[0].profile_path;
+                                } else {
+                                    $stringona = $stringona + "/assets/img/notfound.jpg";
+                                }
+                                $stringona = $stringona + "'></img> </div>"
                                         + "<div class='col-md-10 col-lg-10'> <div class='row'><h1>" + act_name + ":</h1></div><div class='row'> <h3> Trabalhou em:</h3> </div> <div id='movies_feitos'>  <i class='fa fa-spinner fa-spin' style='font-size:24px'></i>Carregando informações! </div> </div>";
                                 $('#modal-content').html($stringona);
                                 $url = '/Ranking?act_id=' + act_id;
@@ -196,13 +196,12 @@
                                 $.get($url, function (movies) {
                                     $("#movies_feitos").html("<ul>")
                                     $.each(movies, function (index, movie) {
-                                        $("#movies_feitos").append("<li>"+movie.title+"</li>");
+                                        $("#movies_feitos").append("<li>" + movie.title + "</li>");
                                     });
                                     $("#movies_feitos").append("</ul>")
 
                                 });
                             });
-
                         }
 
                         function paginacao_agrupada(n_linguas, limite) {
@@ -211,7 +210,6 @@
                                 if (n_lang > 0 && document.getElementById('pag-' + n_lang)) {
                                     addConteudo(n_lang, 1);
                                     carregar(n_lang - 1, limit);
-
                                 } else if (n_lang > 0) {
                                     carregar(n_lang - 1, limit);
                                 }
@@ -222,7 +220,7 @@
                                 $.get("/Ranking?criar=0&completa=0&n_lang=" + n_lang + "&limit=" + limite + "&offset=" + ((pagina - 1) * limite), function (array_de_atores) {
                                     document.getElementById('content-' + n_lang).innerHTML = "";
                                     $.each(array_de_atores, function (index, ator) {
-                                        document.getElementById('content-' + n_lang).innerHTML += (index + 1) + limite * (pagina - 1) + ". " + ator.ActorName + "<br />";
+                                        document.getElementById('content-' + n_lang).innerHTML += " <tag style='cursor: pointer;' onclick='mostrar_modal(" + ator.ActorId + ", \"" + ator.ActorName + "\")'>" + ((index + 1) + limite * (pagina - 1)) + ". " + ator.ActorName + "</tag><br />";
                                     });
                                 });
                             }
@@ -237,7 +235,6 @@
                                 },
                                 success: function (data) {
                                     $("#divbotao").html(' <input class="btn btn-primary" type="button" value="Novo Ranking!" onclick="window.location = window.location.pathname;">');
-
                                     $.each(data, function (index, value) {
                                         //Criando os botões de colapso:
                                         $('#content').append("  <div class='row'><button data-toggle='collapse' data-target='#collapso-" + value + "'> Mostrar Ranking " + value + " </button> <div class='collapse' id='collapso-" + value + "'> <div  id='content-" + value + "'> Carregando... </div><div id='pag-" + value + "'> </div></div> </div>");
