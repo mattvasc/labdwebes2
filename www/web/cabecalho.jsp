@@ -7,7 +7,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><i id="logoIMDB" class="fa fa-imdb" aria-hidden="true"></i></a>
+                <a class="navbar-brand" href="/"><i id="logoIMDB" aria-hidden="true"></i></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">

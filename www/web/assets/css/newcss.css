@@ -562,3 +562,13 @@ footer .container {
 #selectQuery2 {
     padding-left: 5%;
 }
+
+header a.navbar-brand {
+    background-image: url(/sassets/img/imdb.png);
+    height: 35px;
+    width: 84px;
+    background-size: cover;
+    background-position: center;
+    margin-top: 8px;
+    border-radius: 7px;
+}
