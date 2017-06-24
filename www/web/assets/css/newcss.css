@@ -564,11 +564,19 @@ footer .container {
 }
 
 header a.navbar-brand {
-    background-image: url(/sassets/img/imdb.png);
+    background-image: url(/assets/img/imdb.png);
     height: 35px;
     width: 84px;
     background-size: cover;
     background-position: center;
-    margin-top: 8px;
+    margin-top: 7px;
     border-radius: 7px;
+}
+
+header .container {
+    width: 100%;
+}
+
+header .navbar-header {
+    margin-left: 15px !important;
 }
