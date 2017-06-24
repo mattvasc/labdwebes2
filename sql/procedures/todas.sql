@@ -33,6 +33,14 @@ $$ LANGUAGE plpgsql;
 
 
 
+DROP FUNCTION IF EXISTS getTenMoviesByActorId(int);
+CREATE OR REPLACE FUNCTION getTenMoviesByActorId(int) RETURNS TABLE (mid int, mtitle character varying (400), year character varying(100)) AS $$
+BEGIN
+	RETURN QUERY (SELECT movieid, title, mvyear FROM movie INNER JOIN act USING (movieid) WHERE actorid = $1 LIMIT 10);
+END
+$$ LANGUAGE plpgsql;
+ALTER FUNCTION getTenMoviesByActorId(int) OWNER TO aluno;
+
 
 
 
