@@ -143,15 +143,6 @@ a:after {
    ========================================================================== */
 
 #headerwrap {
-	background: url(../img/header-bg.jpg) no-repeat center top;
-	margin-top: -10px;
-	padding-top:20px;
-	text-align:center;
-	background-attachment: relative;
-	background-position: center center;
-	min-height: 500px;
-	width: 100%;
-	
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
     -o-background-size: 100%;
@@ -468,27 +459,32 @@ html {
 
 body {
     margin: 0;
-    position: relative;
     padding-bottom: 6rem;
-    min-height: 100%;
+    height: 100%;
 }/*
 
 */header {
-    height: 12%;
+    height: 51px;
 }
 
 header #navMain {
     padding-bottom: 0;
     padding-top: 0;
+    margin-bottom: 0;
 }
 
 section {
-    height: 78%;
+    min-height: 100%;
+}
+
+section.imgHome {
+    background-image: url(../img/header-bg.jpg);
+    background-size: cover;
+    background-position: center;
 }
 
 footer {
     background: black;    
-    position: absolute;
     right: 0;
     bottom: 0;
     left: 0;
@@ -580,3 +576,14 @@ header .container {
 header .navbar-header {
     margin-left: 15px !important;
 }
+
+#headerwrap {
+    margin-top: 0;
+    padding-top:20px;
+    text-align:center;
+    background-attachment: relative;
+    background-position: center center;
+    min-height: 500px;
+    width: 100%;
+}
+
