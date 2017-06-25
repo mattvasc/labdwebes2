@@ -488,7 +488,7 @@ section {
 }
 
 section.imgHome {
-    background-image: url(../img/header-bg.jpg);
+    background-image: url(../img/cinema1.png);
     background-size: cover;
     background-position: center;
     min-height: 100%;
@@ -496,11 +496,11 @@ section.imgHome {
 
 section.imgHome h1, h2 {
     font-family: 'hardrock';
-    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+    text-shadow: -1px 0 white, 1px 0 white;
 }
 
 section.imgHome h1 b {
-    color: #3498db;
+    color: black;
 }
 
 section.imgHome h1 {
@@ -508,11 +508,11 @@ section.imgHome h1 {
 }
 
 section.imgHome h2 {
-    color: #3498db !important;
+    color: black !important;
 }
 
 section .col-lg-12 {
-    margin-top: 20%;
+    margin-top: 12%;
 }
 
 footer {
