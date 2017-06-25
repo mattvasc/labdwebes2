@@ -6,6 +6,7 @@
 package DAO;
 
 import Model.Actor;
+import Model.Genero;
 import Model.Movie;
 import java.sql.*;
 import java.util.ArrayList;
@@ -49,7 +50,8 @@ public class MovieDAO {
 
         ArrayList<Movie> mv = null;
         connection = ConnectionFactory.getConnection();
-
+        Genero gen;
+        
         try {
 
             CallableStatement call = connection.prepareCall("{call DINAMIC_ACTOR(?,?,?,?,?,?)}");
@@ -63,12 +65,13 @@ public class MovieDAO {
             call.setString(6, A5);
 
             // executando a query
-            ResultSet rs = call.executeQuery();
+            ResultSet rs = call.executeQuery(); // retorna movieid, title, mvyear, genre
 
-            mv = new ArrayList<>();
+             gen = new Genero(rs.getString(4));
+            mv = new ArrayList<Movie>();
 
             while (rs.next()) {
-                mv.add(new Movie()); // fazer a instanciação direito depois que pegar do bd
+                mv.add(new Movie(rs.getInt(1),rs.getString(2),rs.getString(3),gen)); // fazer a instanciação direito depois que pegar do bd
             }
 
         } catch (SQLException e) {

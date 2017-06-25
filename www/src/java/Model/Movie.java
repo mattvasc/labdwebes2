@@ -13,7 +13,7 @@ public class Movie {
 
     private int movieid;
     private String mvyear;
-    private Genero[] genre;
+    private Genero genre;
     private String title;
     private Lang[] lang;
     private Director[] director;
@@ -23,11 +23,18 @@ public class Movie {
         this.title = t;
     }
 
-    public Movie(int id, String t, String y) {
+    public Movie(int id, String t, String y, Genero g) {
         this.movieid = id;
         this.title = t;
         this.mvyear = y;
+        this.genre = g;   
     }
+    
+    public Movie(int id, String t, String y) {
+        this.movieid = id;
+        this.title = t;
+        this.mvyear = y;   
+    }  
 
     public Movie() {
     }
@@ -40,14 +47,11 @@ public class Movie {
         this.mvyear = mvyear;
     }
 
-    public Genero[] getGenre() {
+    public Genero getGenre() {
         return genre;
     }
 
-    public void setGenre(Genero[] genre) {
-        this.genre = genre;
-    }
-
+   
     public String getTitle() {
         return title;
     }

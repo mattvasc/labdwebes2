@@ -41,7 +41,7 @@
 
                 <div class="row centered">
                     <div class="col-lg-6" id="inputAtores">
-                         <label id="ator1"> Ator: <input type ="text" name="ator" id="ator1"> </label> <br />
+                         <label id="ator"> Ator: <input type ="text" name="ator" id="ator1"> </label> <br />
                     </div>
                     <div class="col-lg-6">
                         <button id="btAtores" onclick="addAtores()" type="button">Add Ator</button> <br />
@@ -51,7 +51,7 @@
                     </div>
                       <div class="col-lg-6">
                         <label> Gênero <select id="comboboxGenero" name="genero"> 
-                                <option>-- Selecione --
+                                <option value="default">-- Selecione --
                                 </option>
                             </select> </label> 
                     </div> 
@@ -81,13 +81,22 @@
               });
               $("#l2").addClass("active");
 
-            });   
+            });  
+            
+            </script>
+            
+            <script type="text/javascript"> 
 
             var aux = 1;
+            
             function addAtores(){
+                if(aux<5){
                 aux++;
-                var item = "<label id='ator"+aux+"'> Ator: <input type ='text'name='ator' id='ator"+aux+"' > </label> <br />";
-                $("#inputAtores").append(item);
+                var item = "<label id='ator'> Ator: <input type ='text'name='ator' id='ator"+aux+"' > </label> <br />";
+                $("#inputAtores").append(item);}
+                else 
+                   alert("Maximo de 5 atores");
+                
             }
 
             function removeAtores(){
@@ -100,8 +109,40 @@
             }
 
             function buscar(){
-                // verificação de entrada
-                $("#formulario").submit();
+                obj = new Object();
+                var stringAtores = "";
+                var stringTotal = "";
+                
+                if(document.getElementById("comboboxGenero").value == "default")
+                   alert("Selecione um Genero");
+                else{
+                    stringTotal ='{"GENERO": "'+document.getElementById("comboboxGenero").value+'",';
+                    for(var i = 1;i <= aux;i++){
+                        str = "#ator"+i+"";
+                        var atorzin = $(str).val();
+                        if(i<aux)
+                         stringAtores += '{ "NOME" : "'+atorzin+'"},'; 
+                        else 
+                         stringAtores += '{ "NOME" : "'+atorzin+'"}';    
+                    }
+                    console.log(stringAtores);
+                    stringTotal += '"ATORES": ['+stringAtores+']}'; 
+                    
+                    
+                    $.ajax({
+                    type: "POST",
+                    url: "/Avancada",
+                    data: stringTotal,
+                    dataType: "json", 
+                    contentType: "application/json",
+                    success: function(data){
+                        console.log("sucesso");
+                    },
+                    error: function(erro) {
+                        console.log(erro); 
+                    }
+                 });
+                } 
             }
         </script>    
     </body>  
