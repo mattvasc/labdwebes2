@@ -552,7 +552,9 @@ footer .container {
 }
 
 #divbotao {
-    margin-top: 12%;
+    margin: 5% 0 8% 0;
+    width: 21%;
+    padding: 1.2% 0;
 }
 
 #buttonQuery2 {

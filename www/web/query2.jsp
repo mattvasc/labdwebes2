@@ -61,9 +61,7 @@
                         </div>
                     </div>
                          
-                    </div>
-
-                    
+                    </div>                    
                 </div>
 
                 <div id="myModal" class="modal">
@@ -75,10 +73,13 @@
                     </div>
 
                 </div>
-                <div id="content" class="row panel-group">
+                
+                <div class="row">
+                <div id="content" class="col-lg-offset-2 col-lg-8 col-md-8 panel-group">
 
                 </div>
-                <div class="row centered" id="divbotao">
+                </div>
+                    <div class="row centered" id="divbotao">
                     <input id="buttonQuery2" class="btn btn-primary" type="button" value="Gerar!" onclick="validar()">
                 </div>
 
