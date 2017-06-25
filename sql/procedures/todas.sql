@@ -1,8 +1,34 @@
-CREATE INDEX actor_index_nlang
-  ON public.actor
-  USING btree
-  (n_lang)
-  WITH (FILLFACTOR=100);
+-- Function: public.getnlang(integer, integer)
+
+DROP FUNCTION IF EXISTS public.getactqtd(integer);
+DROP FUNCTION IF EXISTS public.getactqtd(integer, integer);
+
+CREATE OR REPLACE FUNCTION getactqtd(
+    IN integer,
+    IN integer)
+  RETURNS TABLE(qtd integer) AS
+$BODY$
+BEGIN
+	RETURN QUERY (SELECT COUNT(n_lang) FROM actor WHERE n_lang >= $1 AND n_lang <= $2);
+END
+$BODY$
+LANGUAGE plpgsql VOLATILE;
+
+
+CREATE OR REPLACE FUNCTION getactqtd(
+    IN integer)
+  RETURNS TABLE(qtd integer) AS
+$BODY$
+BEGIN
+	RETURN QUERY (SELECT COUNT(n_lang) FROM actor WHERE n_lang = $1);
+END
+$BODY$
+LANGUAGE plpgsql VOLATILE;
+
+
+  
+ALTER FUNCTION getactqtd(integer)  OWNER TO aluno;
+ALTER FUNCTION getactqtd(integer, integer)  OWNER TO aluno;
 
 
 
