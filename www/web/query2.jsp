@@ -29,7 +29,7 @@
                     <div class="row centered">
                         <div class="col-lg-8 col-lg-offset-2">
                             <h2><b>Ranking de Atores Poliglotas</b></h2>
-                            <p>Visualize o ranking de atores que participaram de uma maior quantidade de filmes em idiomas diferentes!.</p>
+                            <p id="queryText">Visualize o ranking de atores que participaram de mais filmes em idiomas diferentes!</p>
                         </div>
                     </div><!-- row -->
                 </div><!-- container -->
@@ -217,14 +217,14 @@
                         function mostrar_modal(act_id, act_name) {
                             $.get('https://api.themoviedb.org/3/search/person?api_key=088e7711438e5b1544142df8f44709de&query=' + encodeURI(act_name), function (json) {
                                 modal.style.display = "block";
-                                $stringona = "<div class='col-md-2 col-lg-2'><img alt='" + act_name + "' src='";
+                                $stringona = "<div class='col-md-3 col-lg-3'><img alt='" + act_name + "' src='";
                                 if (json.results[0] && json.results[0].profile_path) { // Se o personagem tem imagem:
                                     $stringona = $stringona + "https://image.tmdb.org/t/p/w92/" + json.results[0].profile_path;
                                 } else {
                                     $stringona = $stringona + "/assets/img/notfound.jpg";
                                 }
-                                $stringona = $stringona + "'></img> </div>"
-                                        + "<div class='col-md-10 col-lg-10'> <div class='row'><h1>" + act_name + ":</h1></div><div class='row'> <h3> Trabalhou em:</h3> </div> <div id='movies_feitos'>  <i class='fa fa-spinner fa-spin' style='font-size:24px'></i>Carregando informações! </div> </div>";
+                                $stringona = $stringona + "'></img> </div>" + "<div class='col-lg-offset-1 col-md-7 col-lg-7'> <div class='row'><h1>" + act_name 
+                                        + ":</h1></div><div class='row'> <h3> Trabalhou em:</h3> </div> <div id='movies_feitos'>  <i class='fa fa-spinner fa-spin' style='font-size:24px'></i>Carregando informações! </div> </div>";
                                 $('#modal-content').html($stringona);
                                 $url = '/Ranking?opcao=top10&act_id=' + act_id;
                                 $.get($url, function (movies) {

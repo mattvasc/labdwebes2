@@ -22,34 +22,34 @@
     
     <body>
         <%@include file= "cabecalho.jsp" %>
-        <section>
+        <section id="about">
             <div class="container w" id="containAbout">
                 <div class="row centered">
                     <br><br>
                     <div class="col-lg-3">
                         <img class="img-circle" src="assets/img/pic.jpg" width="110" height="110" alt="">
-                        <h4>Carla Gama</h4>
+                        <h2>Carla Gama</h2>
                         <p>BD, ES2 e WEB.</p>
                         <p><a href="https://www.facebook.com/carlagaama">@carlagaama</a></p>
                     </div><!-- col-lg-3 -->
 
                     <div class="col-lg-3">
                         <img class="img-circle" src="assets/img/pic2.jpg" width="110" height="110" alt="">
-                        <h4>Eduardo Cruz</h4>
+                        <h2>Eduardo Cruz</h2>
                         <p>BD e WEB.</p>
                         <p><a href="https://www.facebook.com/ed.rc.5">@ed.rc.5</a></p>
                     </div><!-- col-lg-3 -->
 
                     <div class="col-lg-3">
                         <img class="img-circle" src="assets/img/pic3.jpg" width="110" height="110" alt="">
-                        <h4>Ingrid Santos</h4>
+                        <h2>Ingrid Santos</h2>
                         <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
                         <p><a href="#">@urlAqui</a></p>
                     </div><!-- col-lg-3 -->
 
                     <div class="col-lg-3">
                         <img class="img-circle" src="assets/img/pic4.jpg" width="110" height="110" alt="">
-                        <h4>Mateus Vasconcelos</h4>
+                        <h2>Mateus Vasconcelos</h2>
                         <p>BD, ES2 e WEB.</p>
                         <p><a href="#">@mattvasc</a></p>
                     </div><!-- col-lg-3 -->
