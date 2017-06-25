@@ -14,6 +14,11 @@ public class Genero {
         this.genre = genre;
     }
 
+
+    public Genero() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public String getGenre() {
         return genre;
     }

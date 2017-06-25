@@ -16,10 +16,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import Model.Actor;
+import Model.Genero;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 
 /**
  *
- * @author imsp
+ * @author carlagama
  */
 public class Avancada extends HttpServlet {
 
@@ -76,7 +81,40 @@ public class Avancada extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+                //No controller vai ter algo:
+                //doPost(){
+                //Bla = request.getParameterValue("nome");
+                //// faz bla virar de json para java array
+                //For(ator : Atores)
+                //{ new actor num arraylist}
+                //}
+
+            String json = request.getParameter("tagINGRID");
+
+            if(json != null) {
+                JSONObject json_actor = new JSONObject(json);
+                JSONArray array_actor = json_actor.getJSONArray("label_do_array");
+                
+                Actor[] acts;
+                acts = new Actor[array_actor.length()];
+                Genero genre = new Genero();
+                
+                /*Primeira entrada do json é o genero.*/
+                genre.setGenre((String) array_actor.get(0));
+                System.out.println(genre.getGenre());
+                
+                for(int i = 1; i < array_actor.length(); i++) {
+                  acts[i].setActorName((String) array_actor.get(i));
+                  System.out.println("[" + i + "]: " + acts[i].getActorName());
+                }
+                
+            }else {
+              response.getWriter().print("[\"Escolha um gênero!\"]");
+            }
+
     }
+    
 
     /**
      * Returns a short description of the servlet.

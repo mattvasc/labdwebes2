@@ -20,25 +20,34 @@
         <link href="assets/css/newcss.css" rel="stylesheet">
     </head>
     
-    <body>
+    <body id="bodyHome">
         <%@include file= "cabecalho.jsp" %>
 	
-        <div id="headerwrap">
-            <div class="container">
-        	<div class="row centered">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <h1><b>CineData</b></h1>
-			<h2>O banco de filmes BR</h2>
-                    </div>
-		</div><!-- row -->
-            </div><!-- container -->
-	</div><!-- headerwrap -->
+        <section class="imgHome">
+            <div id="headerwrap">
+                <div class="container">
+                    <div class="row centered">
+                        <div class="col-lg-12">
+                            <h1><b>CineData</b></h1>
+                            <h2>O banco de filmes BR</h2>
+                        </div>
+                    </div><!-- row -->
+                </div><!-- container -->
+            </div><!-- headerwrap -->
+        </section>
+        
+        <section class="slides">
+            <iframe
+                src="slides.jsp" scrolling="no" frameborder="0" 
+                webkitallowfullscreen mozallowfullscreen allowfullscreen id="iframeHome">
+            </iframe>
+        </section>
 
-        <%@include file = "rodape.jsp" %>
-    
+        <%@include file = "rodape.jsp" %>    
         <script>
+            document.getElementById("footer").style.position = "static";
             $(document).ready(function(){
-                $("#l1").addClass("active");      
+                $("#l1").addClass("active");                
             });   
         </script>
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
