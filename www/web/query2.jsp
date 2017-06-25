@@ -28,7 +28,7 @@
                 <div class="container">
                     <div class="row centered">
                         <div class="col-lg-8 col-lg-offset-2">
-                            <h4><b>Ranking de Atores Poliglotas</b></h4>
+                            <h2><b>Ranking de Atores Poliglotas</b></h2>
                             <p>Visualize o ranking de atores que participaram de uma maior quantidade de filmes em idiomas diferentes!.</p>
                         </div>
                     </div><!-- row -->
@@ -41,24 +41,29 @@
                 <input type="hidden" name="n_lang_max" id="n_lang_max" value="32" >
 
                 <div class="row" id="sumir">
-
-                    <div class="col-lg-6 col-md-6">
-                        Filtrar entrada:
-
-                        <div class="row">
-                            <label> <input  type="checkbox" name="apartir" id="apartir"> Filtrar a partir de: </label> <input id="iapartir" size="3" type="text" placeholder="1" onclick="$('#apartir').prop('checked', true);"> <label for="apartir">Idiomas.</label>
-                        </div>
-                        <div class="row">
-                            <label> <input  type="checkbox" name="ate" id="ate"> E Até: </label> <input id="iate" size="3" type="text" placeholder="32" onclick="$('#ate').prop('checked', true);"><label for="ate"> Idiomas.</label>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6">
-                        Opções de visualização:
+                    <div class="col-lg-offset-2 col-lg-8 col-md-8">
+                    
+                    <div class="col-lg-offset-1 col-lg-5 col-md-5">
+                        <h2>Opções de visualização:</h2>
                         <div class="row"><label> <input type="radio" name="ranking_completo" id="ranking_completo_0" value="0" checked="checked"> Ranking Agrupado </label></div>
                         <div class="row">    <label> <input type="radio" name="ranking_completo" id="ranking_completo_1" value="1"> Ranking Tradicional </label></div>
 
                     </div>
+                    
+                    <div class="col-lg-offset-1 col-lg-5 col-md-5">
+                        <h2>Filtrar entrada:</h2>
+
+                        <div class="row">
+                            <label> <input  type="checkbox" name="apartir" id="apartir"> Filtrar a partir de: </label> <input id="iapartir" size="3" type="text" placeholder="1" onclick="$('#apartir').prop('checked', true);"> <label for="apartir"> idiomas.</label>
+                        </div>
+                        <div class="row">
+                            <label> <input type="checkbox" name="ate" id="ate"> E Até: </label> <input id="iate" size="3" type="text" placeholder="32" onclick="$('#ate').prop('checked', true);"><label for="ate"> idiomas.</label>
+                        </div>
+                    </div>
+                         
+                    </div>
+
+                    
                 </div>
 
                 <div id="myModal" class="modal">

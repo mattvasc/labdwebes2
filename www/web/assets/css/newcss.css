@@ -473,6 +473,14 @@ body {
     height: 100%;
 }
 
+h2 b {
+    font-family: 'hardrock';
+    text-shadow: none;
+    color: white;
+    text-shadow: 1px 1px black;
+}
+
+
 header {
     height: 0;
 }
@@ -543,10 +551,18 @@ footer .container {
     padding-bottom: 1%;
 }
 
+#divbotao {
+    margin-top: 12%;
+}
+
 #buttonQuery2 {
     width: 21%;
     padding: 1.2% 0;
-    margin-top: 5%;
+}
+
+#query2Content .row {
+    margin-left: 0;
+    margin-right: 0;
 }
 
 #radioQuery2 #smallLbl {
@@ -561,6 +577,18 @@ footer .container {
 
 #radioQuery2 #labelLang {
     padding-left: 0;
+}
+
+#iapartir, #iate {
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    height: 25px;
+    padding: 0px 9px;
+    text-align: center;
+    width: 20%;
+    vertical-align: middle;
+    font-size: 14px;
+    margin-right: 5px
 }
 
 #containAbout {
