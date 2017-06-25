@@ -24,44 +24,46 @@
     </head>
     <body>
         <%@include file= "cabecalho.jsp" %>
+        
+        <section> 
+            <div id="blue">
+                    <div class="container">
+                            <div class="row centered">
+                                    <div class="col-lg-8 col-lg-offset-2">
+                                        <h2><b>BUSCA AVANÇADA DE FILMES</b></h2>
+                                        <p id="queryText">Encontre seu título informando apenas o gênero e/ou 1 ator presente.</p>
+                                    </div>
+                            </div><!-- row -->
+                    </div><!-- container -->
+            </div><!-- blue wrap -->
 
-        <div id="blue">
-                <div class="container">
-                        <div class="row centered">
-                                <div class="col-lg-8 col-lg-offset-2">
-                                <h4>BUSCA AVANÇADA DE FILMES</b></h4>
-                                <p>Encontre seu título informando apenas o gênero e/ou 1 ator presente.</p>
-                                </div>
-                        </div><!-- row -->
-                </div><!-- container -->
-        </div><!-- blue wrap -->
+            <div class="container w">
+                <form method="POST" action="Avancada" id="formulario">
 
-        <div class="container w">
-            <form method="POST" action="Avancada" id="formulario">
+                    <div class="row centered">
+                        <div class="col-lg-6" id="inputAtores">
+                             <label id="ator"> Ator: <input type ="text" name="ator" id="ator1"> </label> <br />
+                        </div>
+                        <div class="col-lg-6">
+                            <button id="btAtores" onclick="addAtores()" type="button">Add Ator</button> <br />
+                        </div>
+                         <div class="col-lg-6">
+                            <button id=" bAtores" onclick="removeAtores()" type="button">Remove Ator</button> <br />
+                        </div>
+                          <div class="col-lg-6">
+                            <label> Gênero <select id="comboboxGenero" name="genero"> 
+                                    <option value="default">-- Selecione --
+                                    </option>
+                                </select> </label> 
+                        </div> 
+                         <div class="col-lg-6">
+                            <button id="btBuscar" onclick="buscar()" type="button">Buscar</button> <br />
+                        </div>
+                    </div>
 
-                <div class="row centered">
-                    <div class="col-lg-6" id="inputAtores">
-                         <label id="ator"> Ator: <input type ="text" name="ator" id="ator1"> </label> <br />
-                    </div>
-                    <div class="col-lg-6">
-                        <button id="btAtores" onclick="addAtores()" type="button">Add Ator</button> <br />
-                    </div>
-                     <div class="col-lg-6">
-                        <button id=" bAtores" onclick="removeAtores()" type="button">Remove Ator</button> <br />
-                    </div>
-                      <div class="col-lg-6">
-                        <label> Gênero <select id="comboboxGenero" name="genero"> 
-                                <option value="default">-- Selecione --
-                                </option>
-                            </select> </label> 
-                    </div> 
-                     <div class="col-lg-6">
-                        <button id="btBuscar" onclick="buscar()" type="button">Buscar</button> <br />
-                    </div>
-                </div>
-
-            </form>
-        </div><!-- container -->  
+                </form>
+            </div><!-- container -->  
+        </section>
 
         <%@include file = "rodape.jsp" %>
 

@@ -292,7 +292,6 @@
                                         });
                                     });
                                     // init vem aqui //
-
                                     carregar(32, limite);
                                 }
                             });
