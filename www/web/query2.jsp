@@ -75,7 +75,7 @@
                     </div>
 
                 </div>
-                <div id="content" class="row">
+                <div id="content" class="row panel-group">
 
                 </div>
                 <div class="row centered" id="divbotao">
@@ -273,7 +273,7 @@
                                     $("#divbotao").html(' <input class="btn btn-primary" type="button" value="Novo Ranking!" onclick="window.location = window.location.pathname;">');
                                     $.each(data, function (index, value) {
                                         //Criando os botões de colapso:
-                                        $('#content').append("  <div class='row'><button data-toggle='collapse' data-target='#collapso-" + value + "'> Mostrar Ranking " + value + " </button> <div class='collapse' id='collapso-" + value + "'> <div  id='content-" + value + "'> Carregando... </div><div id='pag-" + value + "'> </div></div> </div>");
+                                        $('#content').append("  <div class='panel panel-default'><div class='panel-heading'><h4 class='panel-title'><a data-toggle='collapse' href='#collapso-" + value + "' data-parent='#content'> Mostrar Ranking " + value + " </a></h4></div><div class='panel-collapse collapse' id='collapso-" + value + "'> <div class='panel-body'> <div id='content-" + value + "'> Carregando... </div><div id='pag-" + value + "'> </div></div></div> </div>");
                                         $.get("/Ranking?opcao=qtd&completa=0&n_lang=" + value, function (quantidade_de_atores_na_pagina) {
                                             if (quantidade_de_atores_na_pagina > limite) {
                                                 $('#pag-' + value).pagination({
