@@ -151,6 +151,8 @@ public class Ranking extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+                System.out.println("ESTOU FAZENDO GET MAMAE!!!!!!!");
+
         processRequest(request, response);
     }
 
@@ -165,6 +167,7 @@ public class Ranking extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("ESTOU FAZENDO POST MAMAE!!!!!!!");
         processRequest(request, response);
     }
 
