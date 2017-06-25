@@ -177,7 +177,7 @@
                                 return;
                             }
                             $("#sumir").hide();
-                            $("#divbotao").html('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>Carregando informações! ');
+                            $("#divbotao").html('<i class="fa fa-spinner fa-spin" style="font-size:24px; color:#3498db; margin-right: 5px"></i><p style="color: black">Carregando informações!</p>');
                         }
 
                         function paginacao_completa(min, max, limite) {
@@ -215,7 +215,6 @@
                             });
                         }
                         function mostrar_modal(act_id, act_name) {
-                            // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal
                             $.get('https://api.themoviedb.org/3/search/person?api_key=088e7711438e5b1544142df8f44709de&query=' + encodeURI(act_name), function (json) {
                                 modal.style.display = "block";
                                 $stringona = "<div class='col-md-2 col-lg-2'><img alt='" + act_name + "' src='";
