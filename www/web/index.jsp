@@ -38,7 +38,7 @@
         
         <section class="slides">
             <iframe
-                src="//slides.com/mattvasc/cinedata-1/embed" scrolling="no" frameborder="0" 
+                src="slides.jsp" scrolling="no" frameborder="0" 
                 webkitallowfullscreen mozallowfullscreen allowfullscreen id="iframeHome">
             </iframe>
         </section>
