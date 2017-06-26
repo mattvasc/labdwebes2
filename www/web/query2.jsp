@@ -195,10 +195,11 @@
                                 });
                             }
                             // Criando a div de paginacao
-                            $('#content').html("<div id='containComplet' class='container'><div class='row'><div id='content-geral'></div></div><div class='row'><div id='pag-geral'></div></div></div>");
                             //Calculando o número total de atores e criando a paginacao:
                             $url = "/Ranking?opcao=qtd&completa=1&n_lang_min=" + min + "&n_lang_max=" + max;
                             $.get($url, function (quantidade_de_atores_no_total) {
+                                                            $('#content').html("<div id='containComplet' class='container'><div class='row'><div id='content-geral'></div></div><div class='row'><div id='pag-geral'></div></div></div>");
+
                                 $("#divbotao").html(' <input id="buttonQuery2" class="btn btn-primary" type="button" value="Novo Ranking!" onclick="window.location = window.location.pathname;">');
                                 $('#pag-geral').pagination({
                                     items: quantidade_de_atores_no_total,
