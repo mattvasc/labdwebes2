@@ -552,7 +552,13 @@ footer .container {
 }
 
 #divbotao {
-    margin-top: 12%;
+    margin: 5% 0 8% 0;
+}
+
+#buttonQuery1 {
+    margin-top: 6%;
+    width: 21%;
+    padding: 1.2% 0;
 }
 
 #buttonQuery2 {
@@ -658,7 +664,7 @@ iframe {
     font-weight: bold;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3 {
     font-family: "hardrock";
 }
 
@@ -674,4 +680,39 @@ h1, h2, h3, h4, h5, h6 {
 
 #about a {
     color: #3498db;
+}
+
+.panel-body {
+    min-height: 296px;
+}
+.panel-heading:hover, .panel-heading:focus {
+    background-color: #3498db;
+}
+
+.panel-heading:hover a, .panel-heading:focus a {
+    color: white;
+}
+
+.panel-heading a:focus {
+    color: black;
+}
+
+.panel-heading a:hover {
+    color: white;
+}
+
+.panel-heading a {
+    transition: none;
+}
+
+.panel-body li.active span, 
+.panel-body span.current.prev,
+.panel-body span.current.next {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+.resultAccordion {
+    margin: 20px 0 25px 20px;
+    min-height: 180px !important;
 }
