@@ -12,11 +12,15 @@
         <link rel="shortcut icon" href="assets/ico/favicon.png">
         <script src="assets/js/jquery-3.2.1.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.simplePagination.js"></script>
+
 
         <title>Busca Avançada</title>
 
         <!-- Bootstrap core CSS -->
         <link href="assets/css/bootstrap.css" rel="stylesheet">
+        <link href="assets/css/simplePagination.css" rel="stylesheet">
+
         <link href="assets/css/font-awesome.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
@@ -59,7 +63,18 @@
                 <div class="row centered"><button id="btBuscar" onclick="buscar()" type="button">Buscar</button> </div>
 
             </div><!-- container -->  
-            <div id="result" class="row">
+
+            <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+                <div id="modal-content" class="modal-content">
+
+
+                </div>
+
+            </div>
+
+            <div id="result" class="row ">
 
             </div>
         </section>
@@ -67,8 +82,19 @@
         <%@include file = "rodape.jsp" %>
 
         <script type="text/javascript">
-            $(document).ready(function () {
+            modal = document.getElementById('myModal');
 
+            $(document).ready(function () {
+                window.onclick = function (event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+                $(document).keyup(function (e) {
+                    if (e.keyCode === 27)
+                        modal.style.display = "none";
+
+                });
                 $.ajax({
 
                     type: "GET", //Método
@@ -96,6 +122,65 @@
             function removeAtores() {
                 (aux > 0) ? $(".ator-" + aux--).remove() : alert("Informe pelo menos um ator!");
             }
+
+
+            function mostrar_modal(title, mvyear, mid) {
+                var regex = /.+?(?=\()/;
+
+                $url = 'https://api.themoviedb.org/3/search/movie?api_key=088e7711438e5b1544142df8f44709de&query=' + encodeURI($.trim(title.match(regex))) + "&year=" + mvyear.substring(0, 4);
+                console.log($url);
+                document.body.style.cursor = "progress";
+                $.get($url, function (json) {
+                   document.body.style.cursor ="default";
+
+                    modal.style.display = "block";
+                    $stringona = "<div class='col-md-3 col-lg-3'> <img alt='" + title + "' src='";
+                    if (json.results[0] && json.results[0].poster_path) { // Se o personagem tem imagem:
+                        $stringona = $stringona + "https://image.tmdb.org/t/p/w92/" + json.results[0].poster_path;
+                    } else {
+                        $stringona = $stringona + "/assets/img/not-found.png";
+                    }
+                    $stringona = $stringona + "'></img> </div>" + "<div class='col-lg-offset-1 col-md-8 col-lg-8'><div class='row'>  <div id='directors-div' class='col-lg-4 col-md-4'><div class='row'><h1>Diretor(s): </h1></div></div> <div class='col-lg-4 col-md-4' id='genre-div'>" +
+                            " <div class='row'> <h1> Gênero(s):</h1>   </div></div> <div class=\"col-md-4 col-lg-4\" id='lang-div'> <div class='row'><h1> Idioma(s):</h1> </div></div> <div id='actors-div'> <div class='row'> <div class='offset-lg-4 offset-md-4'>   <h1>Atores:" +
+                            "</h1></div></div> </div></div>";
+                    $('#modal-content').html($stringona);
+
+                    $url = '/Avancada';
+                    console.log(mid);
+                    $.post($url, {opcao: "busca", movieid: mid}, function (data) {
+                        console.log(data);
+                        var i = 0;
+                        $.each(data.actors, function (index, value) {
+                            
+                            $('#actors-div').append("<div class='offset-md-"+(i*4)+" col-lg-4'   >"+value.ActorName+"</div>");
+                            i = (++i)%3;
+
+                        });
+                        $.each(data.directors, function (index, value) {
+                            $('#directors-div').append(value.director);
+
+                        });
+
+                        $.each(data.langs, function (index, value) {
+                            $('#lang-div').append(value.lang);
+
+                        });
+                        $.each(data.generos, function (index, value) {
+                            $('#genre-div').append(value.genre);
+
+                        });
+
+
+
+                    });
+                });
+            }
+
+
+
+
+
+
             function buscar() {
 
                 obj = new Object();
@@ -125,52 +210,53 @@
                 stringTotal += '"ATORES": [' + stringAtores + ']}';
                 console.log(stringTotal);
                 // Send the data using post
-                var posting = $.post("/Avancada", {opcao: "lista", json : stringTotal});
+                var posting = $.post("/Avancada", {opcao: "lista", json: stringTotal});
 
                 // Put the results in a div
                 var limite = 15;
-                
+
+
+
                 function addConteudo(pagina) {
                     $("#content").empty();
-                    for(var i = (pagina -1) * limite;i<filmes.length && i<pagina*limite;i++){
-                        document.getElementById('content').innerHTML += " <tag style='cursor: pointer;' onclick='mostrar_modal(" + filmes[i].title + ", \"" + filmes[i].mvyear + "\")'>" + ((i + 1) + limite * (pagina - 1)) + ". " + filmes[i].title + "</tag><br />";
+                    for (var i = (pagina - 1) * limite; i < filmes.length && i < pagina * limite; i++) {
+                        document.getElementById('content').innerHTML += " <tag style='cursor: pointer;' onclick='mostrar_modal(\" " + filmes[i].title + "\", \"" + filmes[i].mvyear + "\", " + filmes[i].movieid + ");'>" + filmes[i].title + "</tag><br />";
 
                     }
                 }
-                
+
                 posting.done(function (data) {
+                    $("#antes").hide();
                     $("#result").html("<div id=\"content\"> </div> <div id=\"paginacao\"></div>");
-                    
-                    var filmes = [];
-                    $.each(data, function(index, d){
-                        
+
+                    filmes = [];
+                    $.each(data, function (index, d) {
+
                         var obj = new Object();
-                        
+
                         obj.movieid = d.movieid;
                         obj.mvyear = d.mvyear;
-                        obj.genre = d.genre.genre;
                         obj.title = d.title;
-                        
+
                         filmes.push(obj);
                     });
-                     
-                    if(data.length > limite){
+
+                    if (data.length > limite) {
                         $("#paginacao").pagination({
-                            items:data.length,
-                            itemsOnPage:limite,
-                            onInit: function(){
+                            items: data.length,
+                            itemsOnPage: limite,
+                            onInit: function () {
                                 addConteudo(1);
                             },
-                            onPageClick: function (pageNumber){
+                            onPageClick: function (pageNumber) {
                                 addConteudo(pageNumber);
                             }
                         });
-                    }
-                    else{
+                    } else {
                         addConteudo(1);
                     }
-                
-                       
+
+
                 });
             }
         </script>    

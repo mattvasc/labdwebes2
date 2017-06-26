@@ -61,8 +61,7 @@ public class MovieDAO {
             call.setInt(1, id);
 
             ResultSet rs = call.executeQuery();
-            ArrayList temp;
-            // array atores -- array diretores  -- array lang 
+            
             while (rs.next()) {
                 Array a = rs.getArray(1);
                 String[] str = (String[]) a.getArray();
@@ -87,7 +86,6 @@ public class MovieDAO {
                 for (int i = 0; i < str.length; i++) {
                     add.addGenres(new Genero(str[i]));
                 }
-
             }
 
         } catch (SQLException e) {
@@ -126,7 +124,7 @@ public class MovieDAO {
 
             while (rs.next()) {
                 System.out.println(rs.getString(2));
-                mv.add(new Movie(rs.getInt(1), rs.getString(2), rs.getString(3), new Genero(rs.getString(4)))); // fazer a instanciação direito depois que pegar do bd
+                mv.add(new Movie(rs.getInt(1), rs.getString(2), rs.getString(3))); // fazer a instanciação direito depois que pegar do bd
             }
 
         } catch (SQLException e) {
