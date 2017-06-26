@@ -87,7 +87,7 @@ public class Avancada extends HttpServlet {
                 break;
                 
             case "busca":
-                int movieid = Integer.parseInt(request.getParameter("movie_id"));
+                int movieid = Integer.parseInt(request.getParameter("movieid"));
                 MovieDAO mv = new MovieDAO();
                     Adicional result;
                     result = mv.getAdd(movieid);
