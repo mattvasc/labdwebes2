@@ -170,7 +170,7 @@
 
 
                             if (document.getElementById('ranking_completo_1').checked) {
-                                paginacao_completa($("#n_lang_min").val(), $("#n_lang_max").val(), 25);
+                                paginacao_completa($("#n_lang_min").val(), $("#n_lang_max").val(), 15);
                             } else if (document.getElementById('ranking_completo_0').checked)
                             {
                                 paginacao_agrupada($("#n_lang_min").val(), $("#n_lang_max").val(), 10);
@@ -225,7 +225,7 @@
                                     $stringona = $stringona + "/assets/img/notfound.jpg";
                                 }
                                 $stringona = $stringona + "'></img> </div>" + "<div class='col-lg-offset-1 col-md-7 col-lg-7'> <div class='row'><h1>" + act_name 
-                                        + ":</h1></div><div class='row'> <h3> Trabalhou em:</h3> </div> <div id='movies_feitos'>  <i class='fa fa-spinner fa-spin' style='font-size:24px; color:#3498db; margin-right: 5px'></i>Carregando informações! </div> </div>";
+                                        + ":</h1></div><div class='row'> <h3> Apareceu em:</h3> </div> <div id='movies_feitos'>  <i class='fa fa-spinner fa-spin' style='font-size:24px; color:#3498db; margin-right: 5px'></i>Carregando informações! </div> </div>";
                                 $('#modal-content').html($stringona);
                                 $url = '/Ranking?opcao=top10&act_id=' + act_id;
                                 $.get($url, function (movies) {

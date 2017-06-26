@@ -705,9 +705,9 @@ h1, h2, h3 {
     transition: none;
 }
 
-.panel-body li.active span, 
-.panel-body span.current.prev,
-.panel-body span.current.next {
+#query2Content li.active span, 
+#query2Content span.current.prev,
+#query2Content span.current.next {
     background-color: #3498db;
     border-color: #3498db;
 }
