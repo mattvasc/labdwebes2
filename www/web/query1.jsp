@@ -26,42 +26,42 @@
         <%@include file= "cabecalho.jsp" %>
 
         <section> 
-                <div id="blue">
-                    <div class="container">
-                        <div class="row centered">
-                            <div class="col-lg-8 col-lg-offset-2">
-                                <h2><b>BUSCA AVANÇADA DE FILMES</b></h2>
-                                <p id="queryText">Encontre seu título informando apenas o gênero e/ou 1 ator presente.</p>
-                            </div>
-                        </div><!-- row -->
-                    </div><!-- container -->
-                </div><!-- blue wrap -->
-
-                <div class="container w" id="antes">
-
+            <div id="blue">
+                <div class="container">
                     <div class="row centered">
-
-                        <div class="col-lg-6" id="inputAtores">
-                            <div class="row"><label for="ator-0"> Ator: <input type ="text" name="ator" id="ator-0"> </label> </div>
-
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <h2><b>BUSCA AVANÇADA DE FILMES</b></h2>
+                            <p id="queryText">Encontre seu título informando apenas o gênero e/ou 1 ator presente.</p>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="row" id="divadd"><button id="btAtores" onclick="addAtores()" type="button" style="width: 22ch">Adicionar mais Ator</button> </div>
-                            <div class="row" id="divremove"><button id=" bAtores" onclick="removeAtores()" style="width: 22ch" type="button">Remover um Ator</button> </div>
-                            <div class="row"><label> Gênero: <select id="comboboxGenero" name="genero"> 
-                                        <option value="default">-- Selecione --
-                                        </option>
-                                    </select> </label> </div>
+                    </div><!-- row -->
+                </div><!-- container -->
+            </div><!-- blue wrap -->
 
-                        </div>
+            <div class="container w" id="antes">
+
+                <div class="row centered">
+
+                    <div class="col-lg-6" id="inputAtores">
+                        <div class="row"><label for="ator-0"> Ator: <input type ="text" name="ator" id="ator-0"> </label> </div>
 
                     </div>
-                    <div class="row centered"><button id="btBuscar" onclick="buscar()" type="button">Buscar</button> </div>
+                    <div class="col-lg-6">
+                        <div class="row" id="divadd"><button id="btAtores" onclick="addAtores()" type="button" style="width: 22ch">Adicionar mais Ator</button> </div>
+                        <div class="row" id="divremove"><button id=" bAtores" onclick="removeAtores()" style="width: 22ch" type="button">Remover um Ator</button> </div>
+                        <div class="row"><label> Gênero: <select id="comboboxGenero" name="genero"> 
+                                    <option value="default">-- Selecione --
+                                    </option>
+                                </select> </label> </div>
 
-                </div><!-- container -->  
-                <div id="result" class="row">
+                    </div>
 
                 </div>
+                <div class="row centered"><button id="btBuscar" onclick="buscar()" type="button">Buscar</button> </div>
+
+            </div><!-- container -->  
+            <div id="result" class="row">
+
+            </div>
         </section>
 
         <%@include file = "rodape.jsp" %>
@@ -124,20 +124,12 @@
 
                 stringTotal += '"ATORES": [' + stringAtores + ']}';
                 console.log(stringTotal);
-                $.ajax({
-                    type: "POST",
-                    url: "/Avancada",
-                    data: stringTotal,
-                    dataType: "json",
-                    contentType: "application/json",
-                    success: function (data) {
-                        console.log("sucesso");
-                        $("#antes").remove();
-                        
-                    },
-                    error: function (erro) {
-                        console.log(erro);
-                    }
+                // Send the data using post
+                var posting = $.post("/Avancada", { json : stringTotal});
+
+                // Put the results in a div
+                posting.done(function (data) {
+                    console.log("Sucesso, recebi: "+ data);
                 });
             }
         </script>    
