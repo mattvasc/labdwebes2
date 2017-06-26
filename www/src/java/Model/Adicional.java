@@ -12,6 +12,18 @@ import java.util.ArrayList;
  * @author spectrus
  */
 public class Adicional {
+
+    public ArrayList<Actor> getActors() {
+        return actors;
+    }
+
+    public ArrayList<Director> getDirectors() {
+        return directors;
+    }
+
+    public ArrayList<Lang> getLangs() {
+        return langs;
+    }
     private ArrayList<Actor> actors;
     private ArrayList<Director> directors;
     private ArrayList<Lang> langs;

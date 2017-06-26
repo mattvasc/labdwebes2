@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import DAO.*;
+import Model.Adicional;
 import java.sql.*;
 
 /**
@@ -32,14 +33,14 @@ public class TestePaginacao extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text;charset=UTF-8");
-        int pagina = Integer.parseInt(request.getParameter("pag"));
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("Algum texto qualquer vindo do Servelet <br />");
-            out.println("pagina "+pagina);
-            out.println("<br />sfdsafdjlh sadfhuiwf sdfhiwf sadfsdfuiasdf");
-         
-        }
+        
+        MovieDAO teste = new MovieDAO();
+        
+        Adicional add = teste.getAdd(112445);
+        
+        System.out.println(add.getActors());
+        
+    
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -54,19 +55,7 @@ public class TestePaginacao extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        MovieDAO teste = new MovieDAO();
-                
-        response.setContentType("text;charset=UTF-8");
-        int pagina = Integer.parseInt(request.getParameter("pag"));
-        try (PrintWriter out = response.getWriter()) {
-          //  String rst = teste.query(20, ((pagina-1)*20));
-            
-          //  out.print(rst);
-            out.close();
-        }
-        catch (Exception e) {
-            System.out.println("vish");
-        }
+
     }
 
     /**

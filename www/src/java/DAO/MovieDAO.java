@@ -6,10 +6,14 @@
 package DAO;
 
 import Model.Actor;
+import Model.Adicional;
+import Model.Director;
 import Model.Genero;
+import Model.Lang;
 import Model.Movie;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -47,19 +51,38 @@ public class MovieDAO {
     }
 
  
-    public Adcional getAdd(int id){
+    public Adicional getAdd(int id){
     
-        Adcional add = null;
         connection = ConnectionFactory.getConnection();
+        Adicional add = new Adicional();
         try {
             
             CallableStatement call = connection.prepareCall("{additional_fields(?)}");
             call.setInt(1,id);
             ResultSet rs = call.executeQuery();
             
+            ArrayList temp;
             // array atores -- array diretores  -- array lang 
-            while (rs.next()) {
-                add = new Movie(rs.getArray(1),rs.getArray(2),rs.getArray(2));
+            while (rs.next()) { 
+                temp = new ArrayList<>(Arrays.asList(rs.getArray(1)));
+                String str;
+               for(int i=0;i<temp.size();i++){
+                   str = temp.get(i).toString();
+                   add.addActor(new Actor(str));
+               }
+               
+               temp = new ArrayList<>(Arrays.asList(rs.getArray(2)));
+               for(int i=0;i<temp.size();i++){
+                   str = temp.get(i).toString();
+                  add.addDirector(new Director(str));
+               }
+               
+               temp = new ArrayList<>(Arrays.asList(rs.getArray(3)));
+               for( int i=0;i<temp.size();i++){
+                   str = temp.get(i).toString();
+                    add.addLangs(new Lang(str));
+                   
+               }
             }
             
         
