@@ -267,7 +267,7 @@
                                 type: "GET",
                                 url: $url,
                                 dataType: "json",
-                                timeout: 5000,
+                                timeout: 10000,
                                 error: function () {
                                     alert("Tempo esgotado!");
                                 },
