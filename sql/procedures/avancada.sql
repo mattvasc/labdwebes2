@@ -1,4 +1,3 @@
-
 DROP FUNCTION IF EXISTS public.select_movie_actors_in_common(text, text, text, text, text, text);
 
 CREATE OR REPLACE FUNCTION public.select_movie_actors_in_common(
@@ -16,44 +15,44 @@ BEGIN
 			RETURN QUERY (SELECT distinct movieid, title, mvyear
 		  FROM (SELECT movieid FROM genre WHERE genre.genre = genero) AS generos
 		  NATURAL JOIN (
-		    (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_one) as sub1
+		    (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname LIKE actor_one ||'%') as sub1
 			))AS atores_movieid NATURAL JOIN movie order by title);
 
 		ELSIF actor_tree IS NULL THEN
 			RETURN QUERY(SELECT distinct movieid, title, mvyear
 			  FROM (SELECT movieid FROM genre WHERE genre = genero) AS generos
 			  NATURAL JOIN (
-			    (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_one) as sub1
-					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_two) as sub2
+			    (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname LIKE actor_one ||'%') as sub1
+					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname LIKE actor_two ||'%') as sub2
 				)))AS atores_movieid NATURAL JOIN movie order by title);
 
 		ELSIF actor_four IS NULL THEN
 			RETURN QUERY (SELECT distinct movieid, title, mvyear
 				FROM (SELECT movieid FROM genre WHERE genre = genero) AS generos
 				NATURAL JOIN (
-					(SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_one) as sub1
-					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_two) as sub2
-					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_tree) as sub3
+					(SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname LIKE actor_one ||'%') as sub1
+					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname LIKE actor_two ||'%') as sub2
+					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname LIKE actor_tree ||'%') as sub3
 				))))AS atores_movieid NATURAL JOIN movie order by title);
 
 		ELSIF actor_five IS NULL THEN
 			RETURN QUERY (SELECT distinct movieid, title, mvyear
 				FROM (SELECT movieid FROM genre WHERE genre = genero) AS generos
 				NATURAL JOIN (
-					(SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_one) as sub1
-					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_two) as sub2
-					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_tree) as sub3
-					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_four) as sub4
+					(SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname LIKE actor_one ||'%') as sub1
+					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname LIKE actor_two ||'%') as sub2
+					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname LIKE actor_tree ||'%') as sub3
+					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname LIKE actor_four ||'%') as sub4
 				)))))AS atores_movieid NATURAL JOIN movie order by title);
 		ELSE
 			RETURN QUERY (SELECT distinct movieid, title, mvyear 
 				FROM (SELECT movieid FROM genre WHERE genre = genero) AS generos
 				NATURAL JOIN (
-					(SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_one) as sub1
-					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_two) as sub2
-					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_tree) as sub3
-					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_four) as sub4
-					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_five) as sub5
+					(SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname LIKE actor_one ||'%') as sub1
+					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname LIKE actor_two ||'%') as sub2
+					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname LIKE actor_tree ||'%') as sub3
+					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname LIKE actor_four ||'%') as sub4
+					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname LIKE actor_five ||'%') as sub5
 				))))))AS atores_movieid NATURAL JOIN movie order by title);
 
 		END IF;

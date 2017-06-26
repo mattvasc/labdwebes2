@@ -221,7 +221,7 @@
                                 modal.style.display = "block";
                                 $stringona = "<div class='col-md-3 col-lg-3'><img alt='" + act_name + "' src='";
                                 if (json.results[0] && json.results[0].profile_path) { // Se o personagem tem imagem:
-                                    $stringona = $stringona + "https://image.tmdb.org/t/p/w92/" + json.results[0].profile_path;
+                                    $stringona = $stringona + "https://image.tmdb.org/t/p/w500/" + json.results[0].profile_path;
                                 } else {
                                     $stringona = $stringona + "/assets/img/notfound.jpg";
                                 }

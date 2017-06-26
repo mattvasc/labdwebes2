@@ -87,7 +87,6 @@ public class Ranking extends HttpServlet {
                     if ("0".equals(request.getParameter("completa"))) {/* Paginacao Agrupada */
                         int nlang;
                         if (request.getParameter("n_lang") == null) {
-                            System.out.println("É nulo!!!!!!!");
                             nlang = 1;
                         } else {
                             nlang = Integer.parseInt(request.getParameter("n_lang"));
