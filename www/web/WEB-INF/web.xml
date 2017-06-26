@@ -48,6 +48,14 @@
         <servlet-name>viewAvançada</servlet-name>
         <url-pattern>/ConsultaAvancada</url-pattern>
     </servlet-mapping>
+  <servlet> 
+        <servlet-name>Index</servlet-name>
+        <jsp-file>/index.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Index</servlet-name>
+        <url-pattern>/ </url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

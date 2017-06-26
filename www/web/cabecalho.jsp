@@ -11,10 +11,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li id="l1"><a href="index.jsp">INICIAL</a></li>
-                    <li id="l2"><a href="query1.jsp">BUSCA AVANÇADA</a></li>
-                    <li id = "l3"><a href="query2.jsp">RANKING</a></li>
-                    <li id = "l4"><a href="about.jsp">SOBRE NÓS</a></li>
+                    <li id="l1"><a href="/ ">INICIAL</a></li>
+                    <li id="l2"><a href="/ConsultaAvancada">BUSCA AVANÇADA</a></li>
+                    <li id = "l3"><a href="/GerarRanking">RANKING</a></li>
+                    <li id = "l4"><a href="/SobreNos">SOBRE NÓS</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
