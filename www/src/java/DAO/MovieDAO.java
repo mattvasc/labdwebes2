@@ -46,7 +46,7 @@ public class MovieDAO {
         }
     }
 
-    public ArrayList<Movie> getMovie(String GENERO, ArrayList<Actor> atores) {
+    public ArrayList<Movie> getMovie(Genero genero, ArrayList<Actor> atores) {
 
         ArrayList<Movie> mv = null;
         connection = ConnectionFactory.getConnection();
@@ -56,7 +56,7 @@ public class MovieDAO {
             CallableStatement call = connection.prepareCall("{call select_movie_actors_in_common(?,?,?,?,?,?)}");
 
             // passando as coisas pra stored procedure
-            call.setString(1, GENERO);
+            call.setString(1, genero.toString());
             int i;
             for(i= 0; i<atores.size();i++){
                  call.setString ((i+2), atores.get(i).getActorName());  // passa a qnt de atores que tem. de 1 a 5       
