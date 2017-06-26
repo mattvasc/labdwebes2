@@ -32,14 +32,15 @@ public class TestePaginacao extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text;charset=UTF-8");
-        
+        response.setContentType("text/html;charset=UTF-8");
+       response.getWriter().println("<html><head> <meta charset='utf-8'> </head> <body> oioioioi"); 
         MovieDAO teste = new MovieDAO();
         
         Adicional add = teste.getAdd(112445);
         
-        System.out.println(add.getActors());
-        
+       response.getWriter().println(add.getActors().get(0).getActorName());
+               response.getWriter().println("</body></html>"); 
+
     
     }
 
@@ -55,7 +56,7 @@ public class TestePaginacao extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+            processRequest(request, response);
     }
 
     /**

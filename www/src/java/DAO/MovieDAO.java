@@ -39,7 +39,7 @@ public class MovieDAO {
             retorno = new ArrayList<Movie>();
 
             while (rs.next()) {
-                retorno.add(new Movie(rs.getInt(1), rs.getString(2), rs.getString(3))); 
+                retorno.add(new Movie(rs.getInt(1), rs.getString(2), rs.getString(3)));
             }
 
         } catch (SQLException e) {
@@ -50,42 +50,40 @@ public class MovieDAO {
         }
     }
 
- 
-    public Adicional getAdd(int id){
-    
+    public Adicional getAdd(int id) {
+
         connection = ConnectionFactory.getConnection();
         Adicional add = new Adicional();
+        System.out.println("Entrei no add");
         try {
-            
-            CallableStatement call = connection.prepareCall("{additional_fields(?)}");
-            call.setInt(1,id);
+
+            CallableStatement call = connection.prepareCall("SELECT * FROM additional_fields(?);");
+            call.setInt(1, id);
+
             ResultSet rs = call.executeQuery();
-            
             ArrayList temp;
             // array atores -- array diretores  -- array lang 
-            while (rs.next()) { 
-                temp = new ArrayList<>(Arrays.asList(rs.getArray(1)));
-                String str;
-               for(int i=0;i<temp.size();i++){
-                   str = temp.get(i).toString();
-                   add.addActor(new Actor(str));
-               }
-               
-               temp = new ArrayList<>(Arrays.asList(rs.getArray(2)));
-               for(int i=0;i<temp.size();i++){
-                   str = temp.get(i).toString();
-                  add.addDirector(new Director(str));
-               }
-               
-               temp = new ArrayList<>(Arrays.asList(rs.getArray(3)));
-               for( int i=0;i<temp.size();i++){
-                   str = temp.get(i).toString();
-                    add.addLangs(new Lang(str));
-                   
-               }
+            while (rs.next()) {
+                Array a = rs.getArray(1);
+                String[] str = (String[]) a.getArray();
+                for (int i = 0; i < str.length; i++) {
+                    add.addActor(new Actor(str[i]));
+                }
+
+                a = rs.getArray(2);
+                str = (String[]) a.getArray();
+                for (int i = 0; i < str.length; i++) {
+                    add.addDirector(new Director(str[i]));
+                }
+
+                a = rs.getArray(3);
+                str = (String[]) a.getArray();
+                for (int i = 0; i < str.length; i++) {
+                    add.addLangs(new Lang(str[i]));
+                }
+
             }
-            
-        
+
         } catch (SQLException e) {
 
             System.out.print("SQL EXCEPTION: " + e.getMessage());
@@ -94,13 +92,12 @@ public class MovieDAO {
             return add;
         }
     }
-    
- 
+
     public ArrayList<Movie> getMovie(Genero genero, ArrayList<Actor> atores) {
 
         ArrayList<Movie> mv = null;
         connection = ConnectionFactory.getConnection();
-        
+
         try {
 
             CallableStatement call = connection.prepareCall("{call select_movie_actors_in_common(?,?,?,?,?,?)}");
@@ -108,11 +105,12 @@ public class MovieDAO {
             // passando as coisas pra stored procedure
             call.setString(1, genero.toString());
             int i;
-            for(i= 0; i<atores.size();i++){
-                 call.setString ((i+2), atores.get(i).getActorName());  // passa a qnt de atores que tem. de 1 a 5       
+            for (i = 0; i < atores.size(); i++) {
+                call.setString((i + 2), atores.get(i).getActorName());  // passa a qnt de atores que tem. de 1 a 5       
             }
-               for(;i<5;i++)
-                 call.setNull((i+2), java.sql.Types.VARCHAR);  
+            for (; i < 5; i++) {
+                call.setNull((i + 2), java.sql.Types.VARCHAR);
+            }
 
             // executando a query
             System.out.println(call.toString());
@@ -122,7 +120,7 @@ public class MovieDAO {
 
             while (rs.next()) {
                 System.out.println(rs.getString(2));
-                mv.add(new Movie(rs.getInt(1),rs.getString(2),rs.getString(3),new Genero(rs.getString(4)))); // fazer a instanciação direito depois que pegar do bd
+                mv.add(new Movie(rs.getInt(1), rs.getString(2), rs.getString(3), new Genero(rs.getString(4)))); // fazer a instanciação direito depois que pegar do bd
             }
 
         } catch (SQLException e) {
