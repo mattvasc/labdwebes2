@@ -9,14 +9,21 @@ import java.util.ArrayList;
 
 /**
  *
- * @author spectrus
+ * @author spectrus, ingrid, carla
  */
 public class Adicional {
+    private ArrayList<Actor> actors;
+    private ArrayList<Director> directors;
+    private ArrayList<Lang> langs;
+    private ArrayList<Genero> generos;
+    
 
     public ArrayList<Actor> getActors() {
         return actors;
     }
-
+    public ArrayList<Genero> getGeneros() {
+            return generos;
+        }
     public ArrayList<Director> getDirectors() {
         return directors;
     }
@@ -24,14 +31,12 @@ public class Adicional {
     public ArrayList<Lang> getLangs() {
         return langs;
     }
-    private ArrayList<Actor> actors;
-    private ArrayList<Director> directors;
-    private ArrayList<Lang> langs;
     
     public Adicional(){
-        actors = new ArrayList<>();
-        directors = new ArrayList<>();
-        langs = new ArrayList<>();
+        this.actors = new ArrayList<>();
+        this.directors = new ArrayList<>();
+        this.langs = new ArrayList<>();
+        this.generos = new ArrayList<>();
     }
     
     public void addActor(Actor a){
@@ -44,5 +49,7 @@ public class Adicional {
     public void addLangs(Lang l){
         this.langs.add(l);
     }
-    
+    public void addGenres(Genero genero){
+        this.generos.add(genero);
+    }
 }

@@ -81,6 +81,12 @@ public class MovieDAO {
                 for (int i = 0; i < str.length; i++) {
                     add.addLangs(new Lang(str[i]));
                 }
+                
+                a = rs.getArray(4);
+                str = (String[]) a.getArray();
+                for (int i = 0; i < str.length; i++) {
+                    add.addGenres(new Genero(str[i]));
+                }
 
             }
 
