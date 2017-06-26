@@ -125,11 +125,11 @@
                 stringTotal += '"ATORES": [' + stringAtores + ']}';
                 console.log(stringTotal);
                 // Send the data using post
-                var posting = $.post("/Avancada", { json : stringTotal});
+                var posting = $.post("/Avancada", {opcao: "lista", json : stringTotal});
 
                 // Put the results in a div
                 posting.done(function (data) {
-                    console.log("Sucesso, recebi: "+ data);
+                    console.log("Sucesso, recebi: "+ data);     
                 });
             }
         </script>    
