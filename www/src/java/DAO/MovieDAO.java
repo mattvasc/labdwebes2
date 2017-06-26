@@ -46,6 +46,32 @@ public class MovieDAO {
         }
     }
 
+    
+    public Adcional getAdd(int id){
+    
+        Adcional add = null;
+        connection = ConnectionFactory.getConnection();
+        try {
+            
+            CallableStatement call = connection.prepareCall("{additional_fields(?)}");
+            call.setInt(1,id);
+            ResultSet rs = call.executeQuery();
+            
+            // array atores -- array diretores  -- array lang 
+            while (rs.next()) {
+                add = new Movie(rs.getArray(1),rs.getArray(2),rs.getArray(2));
+            }
+            
+        
+        } catch (SQLException e) {
+
+            System.out.print("SQL EXCEPTION: " + e.getMessage());
+
+        } finally {
+            return add;
+        }
+    }
+    
     public ArrayList<Movie> getMovie(String GENERO, ArrayList<Actor> atores) {
 
         ArrayList<Movie> mv = null;
