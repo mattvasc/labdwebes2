@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Model.Actor;
 import Model.Genero;
+import java.util.Enumeration;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -38,46 +39,39 @@ public class Avancada extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        
-         //No controller vai ter algo:
         //doPost(){
         //Bla = request.getParameterValue("nome");
         //// faz bla virar de json para java array
         //For(ator : Atores)
         //{ new actor num arraylist}
         //}
-        String json = request.getParameter("tagINGRID");
-
+        String json = request.getParameter("json");
         if (json != null) {
-            JSONObject json_actor = new JSONObject(json);
-            JSONArray array_actor = json_actor.getJSONArray("label_do_array");
-
-            Actor[] acts;
-            acts = new Actor[array_actor.length()];
-            Genero genre = new Genero();
-
-            /*Primeira entrada do json é o genero.*/
-            genre.setGenre((String) array_actor.get(0));
-            System.out.println(genre.getGenre());
-
-            for (int i = 1; i < array_actor.length(); i++) {
-                acts[i].setActorName((String) array_actor.get(i));
-                System.out.println("[" + i + "]: " + acts[i].getActorName());
-            }
-
+            JSONObject json_obj = new JSONObject(json);
+            
+            JSONArray array_actor = json_obj.getJSONArray("ATORES");
+//                    System.out.println("array_actor");
+              
+            String string_genero = json_obj.getString("GENERO");
+//                  System.out.println(string_genero);
+            Genero genre = new Genero(string_genero);
+            
+           ArrayList<Actor> acts = new ArrayList<>();
+            
+            JSONObject intermediario;
+//            System.out.println("ENTRANDO NO FOR");
+            for(int i =0; i< array_actor.length();i++){
+                intermediario = new JSONObject(array_actor.get(i).toString());
+                acts.add(new Actor( intermediario.getString("NOME")) );
+           }
+  
         } else {
             response.getWriter().print("[\"Escolha um gênero!\"]");
         }
-
-        
-        
         
         MovieDAO mv = new MovieDAO();
-
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
-
+        
+        
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
@@ -101,7 +95,7 @@ public class Avancada extends HttpServlet {
         // processRequest(request, response);
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().print("<html><head><meta charset=\"utf-8\"</head><body><h1>Apenas requisições POST por favor!</body></html>"); 
+        response.getWriter().print("<html><head><meta charset=\"utf-8\"</head><body><h1>Apenas requisições POST por favor!</body></html>");        
     }
 
     /**
@@ -116,8 +110,7 @@ public class Avancada extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
-   
+        
     }
 
     /**
