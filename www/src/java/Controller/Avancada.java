@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Model.Actor;
+import Model.Adicional;
 import Model.Genero;
 import java.util.Enumeration;
 import org.json.JSONArray;
@@ -45,39 +46,57 @@ public class Avancada extends HttpServlet {
         //For(ator : Atores)
         //{ new actor num arraylist}
         //}
-        String json = request.getParameter("json");
-        if (json != null) {
-            JSONObject json_obj = new JSONObject(json);
-            
-            JSONArray array_actor = json_obj.getJSONArray("ATORES");
-//                    System.out.println("array_actor");
-              
-            String string_genero = json_obj.getString("GENERO");
-//                  System.out.println(string_genero);
-            Genero genre = new Genero(string_genero);
-            
-           ArrayList<Actor> acts = new ArrayList<>();
-            
-            JSONObject intermediario;
-//            System.out.println("ENTRANDO NO FOR");
-            for(int i =0; i< array_actor.length();i++){
-                intermediario = new JSONObject(array_actor.get(i).toString());
-                acts.add(new Actor( intermediario.getString("NOME")) );
-           }
-  
-        } else {
-            response.getWriter().print("[\"Escolha um gênero!\"]");
-        }
-        
-        MovieDAO mv = new MovieDAO();
-        
-        
+        String opcao = request.getParameter("opcao");
+       //Avisando o tipo de resposta
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
+       
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
 
-        /*ArrayList<Movie> result;
-        result = mv.getMovie();
-        response.getWriter().print(gson.toJson(result));*/
+        switch(opcao){
+            case "lista":
+            String json = request.getParameter("json");
+            if (json != null) {
+                JSONObject json_obj = new JSONObject(json);
+
+                JSONArray array_actor = json_obj.getJSONArray("ATORES");
+    //                    System.out.println("array_actor");
+
+                String string_genero = json_obj.getString("GENERO");
+    //                  System.out.println(string_genero);
+                Genero genre = new Genero(string_genero);
+
+               ArrayList<Actor> acts = new ArrayList<>();
+
+                JSONObject intermediario;
+    //            System.out.println("ENTRANDO NO FOR");
+                for(int i =0; i< array_actor.length();i++){
+                    intermediario = new JSONObject(array_actor.get(i).toString());
+                    acts.add(new Actor( intermediario.getString("NOME")) );
+               }
+
+             MovieDAO mv = new MovieDAO();
+             ArrayList<Movie> result;
+             result = mv.getMovie(genre, acts);
+             response.getWriter().print(gson.toJson(result));
+
+            } else {
+                response.getWriter().print("[\"Escolha um gênero!\"]");
+            }
+                break;
+                
+            case "busca":
+                int movieid = Integer.parseInt(request.getParameter("movie_id"));
+                MovieDAO mv = new MovieDAO();
+                    Adicional result;
+                    result = mv.getAdd(movieid);
+                    response.getWriter().print(gson.toJson(result));
+
+                break;
+        }
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
