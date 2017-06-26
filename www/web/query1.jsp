@@ -128,8 +128,49 @@
                 var posting = $.post("/Avancada", {opcao: "lista", json : stringTotal});
 
                 // Put the results in a div
+                var limite = 15;
+                
+                function addConteudo(pagina) {
+                    $("#content").empty();
+                    for(var i = (pagina -1) * limite;i<filmes.length && i<pagina*limite;i++){
+                        document.getElementById('content').innerHTML += " <tag style='cursor: pointer;' onclick='mostrar_modal(" + filmes[i].title + ", \"" + filmes[i].mvyear + "\")'>" + ((i + 1) + limite * (pagina - 1)) + ". " + filmes[i].title + "</tag><br />";
+
+                    }
+                }
+                
                 posting.done(function (data) {
-                    console.log("Sucesso, recebi: "+ data);     
+                    $("#result").html("<div id=\"content\"> </div> <div id=\"paginacao\"></div>");
+                    
+                    var filmes = [];
+                    $.each(data, function(index, d){
+                        
+                        var obj = new Object();
+                        
+                        obj.movieid = d.movieid;
+                        obj.mvyear = d.mvyear;
+                        obj.genre = d.genre.genre;
+                        obj.title = d.title;
+                        
+                        filmes.push(obj);
+                    });
+                     
+                    if(data.length > limite){
+                        $("#paginacao").pagination({
+                            items:data.length,
+                            itemsOnPage:limite,
+                            onInit: function(){
+                                addConteudo(1);
+                            },
+                            onPageClick: function (pageNumber){
+                                addConteudo(pageNumber);
+                            }
+                        });
+                    }
+                    else{
+                        addConteudo(1);
+                    }
+                
+                       
                 });
             }
         </script>    

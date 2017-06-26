@@ -43,8 +43,8 @@
                     <div class="col-lg-3">
                         <img class="img-circle" src="assets/img/pic3.jpg" width="110" height="110" alt="">
                         <h2>Ingrid Santos</h2>
-                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
-                        <p><a href="#">@urlAqui</a></p>
+                        <p>BD, ES2 e WEB.</p>
+                        <p><a href="https://www.linkedin.com/in/ingridsantos13/">@ingridmsp</a></p>
                     </div><!-- col-lg-3 -->
 
                     <div class="col-lg-3">
