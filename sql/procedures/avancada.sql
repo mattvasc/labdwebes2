@@ -13,7 +13,7 @@ BEGIN
 
 		ELSIF actor_three IS NULL THEN
 			RETURN QUERY(SELECT distinct movieid, title, mvyear, genre
-			  FROM (SELECT movieid, genre FROM genre WHERE genre = genre) AS generos
+			  FROM (SELECT movieid, genre FROM genre WHERE genre = genero) AS generos
 			  NATURAL JOIN (
 			    (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_one) as sub1
 					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_two) as sub2
@@ -21,7 +21,7 @@ BEGIN
 
 		ELSIF actor_four IS NULL THEN
 			RETURN QUERY (SELECT distinct movieid, title, mvyear, genre
-				FROM (SELECT movieid, genre FROM genre WHERE genre = genre) AS generos
+				FROM (SELECT movieid, genre FROM genre WHERE genre = genero) AS generos
 				NATURAL JOIN (
 					(SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_one) as sub1
 					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_two) as sub2
@@ -30,7 +30,7 @@ BEGIN
 
 		ELSIF actor_five IS NULL THEN
 			RETURN QUERY (SELECT distinct movieid, title, mvyear, genre
-				FROM (SELECT movieid, genre FROM genre WHERE genre = genre) AS generos
+				FROM (SELECT movieid, genre FROM genre WHERE genre = genero) AS generos
 				NATURAL JOIN (
 					(SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_one) as sub1
 					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_two) as sub2
@@ -39,7 +39,7 @@ BEGIN
 				)))))AS atores_movieid NATURAL JOIN movie order by title);
 		ELSE
 			RETURN QUERY (SELECT distinct movieid, title, mvyear, genre
-				FROM (SELECT movieid, genre FROM genre WHERE genre = genre) AS generos
+				FROM (SELECT movieid, genre FROM genre WHERE genre = genero) AS generos
 				NATURAL JOIN (
 					(SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_one) as sub1
 					INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = actor_two) as sub2
@@ -68,8 +68,8 @@ $BODY$
 BEGIN
 
 RETURN QUERY (SELECT ARRAY(SELECT actorname FROM (SELECT DISTINCT actorname, n_lang FROM act NATURAL JOIN actor WHERE movieid = $1 ORDER BY n_lang DESC LIMIT 20) as B), ARRAY(SELECT dname FROM director NATURAL JOIN director_movie WHERE movieid = $1), ARRAY(SELECT lang FROM lang WHERE movieid = $1));
-  
-  
+
+
 END
 $BODY$
   LANGUAGE plpgsql VOLATILE;
