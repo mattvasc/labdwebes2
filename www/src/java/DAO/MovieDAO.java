@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author porperyus
+ * @author ingridmsp
  */
 public class MovieDAO {
 
@@ -46,32 +46,33 @@ public class MovieDAO {
         }
     }
 
-    public ArrayList<Movie> getMovie(String GENERO, String A1, String A2, String A3, String A4, String A5) {
+    public ArrayList<Movie> getMovie(String GENERO, ArrayList<Actor> atores) {
 
         ArrayList<Movie> mv = null;
         connection = ConnectionFactory.getConnection();
-        Genero gen;
         
         try {
 
-            CallableStatement call = connection.prepareCall("{call DINAMIC_ACTOR(?,?,?,?,?,?)}");
+            CallableStatement call = connection.prepareCall("{call select_movie_actors_in_common(?,?,?,?,?,?)}");
 
             // passando as coisas pra stored procedure
             call.setString(1, GENERO);
-            call.setString(2, A1);
-            call.setString(3, A2);
-            call.setString(4, A3);
-            call.setString(5, A4);
-            call.setString(6, A5);
+            int i;
+            for(i= 0; i<atores.size();i++){
+                 call.setString ((i+2), atores.get(i).getActorName());  // passa a qnt de atores que tem. de 1 a 5       
+            }
+               for(;i<5;i++)
+                 call.setNull((i+2), java.sql.Types.VARCHAR);  
 
             // executando a query
+            System.out.println(call.toString());
             ResultSet rs = call.executeQuery(); // retorna movieid, title, mvyear, genre
 
-             gen = new Genero(rs.getString(4));
             mv = new ArrayList<Movie>();
 
             while (rs.next()) {
-                mv.add(new Movie(rs.getInt(1),rs.getString(2),rs.getString(3),gen)); // fazer a instanciação direito depois que pegar do bd
+                System.out.println(rs.getString(2));
+                mv.add(new Movie(rs.getInt(1),rs.getString(2),rs.getString(3),new Genero(rs.getString(4)))); // fazer a instanciação direito depois que pegar do bd
             }
 
         } catch (SQLException e) {
