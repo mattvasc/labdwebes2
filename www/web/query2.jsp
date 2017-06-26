@@ -75,12 +75,12 @@
                 </div>
                 
                 <div class="row">
-                <div id="content" class="col-lg-offset-2 col-lg-8 col-md-8 panel-group">
+                    <div id="content" class="col-lg-offset-1 col-lg-10 col-md-10 panel-group">
 
+                    </div>
                 </div>
-                </div>
-                    <div class="row centered" id="divbotao">
-                    <input id="buttonQuery2" class="btn btn-primary" type="button" value="Gerar!" onclick="validar()">
+                <div class="row centered" id="divbotao">
+                    <input id="buttonQuery1" class="btn btn-primary" type="button" value="Gerar!" onclick="validar()">
                 </div>
 
             </div><!-- container -->
@@ -184,7 +184,7 @@
                         function paginacao_completa(min, max, limite) {
                             // Funcao que carrega paginas:
                             function addConteudo(pagina) {
-                                document.getElementById('content-geral').innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>Carregando informações! '; // Carregando...
+                                document.getElementById('content-geral').innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size:24px; color:#3498db; margin-right: 5px"></i>Carregando informações! '; // Carregando...
                                 $url = "/Ranking?opcao=pagina&completa=1&n_lang_min=" + min + "&n_lang_max=" + max + "&limit=" + limite + "&offset=" + ((pagina - 1) * limite);
                                 console.log($url);
                                 $.get($url, function (array_de_atores) {
@@ -199,7 +199,7 @@
                             //Calculando o número total de atores e criando a paginacao:
                             $url = "/Ranking?opcao=qtd&completa=1&n_lang_min=" + min + "&n_lang_max=" + max;
                             $.get($url, function (quantidade_de_atores_no_total) {
-                                $("#divbotao").html(' <input class="btn btn-primary" type="button" value="Novo Ranking!" onclick="window.location = window.location.pathname;">');
+                                $("#divbotao").html(' <input id="buttonQuery2" class="btn btn-primary" type="button" value="Novo Ranking!" onclick="window.location = window.location.pathname;">');
                                 $('#pag-geral').pagination({
                                     items: quantidade_de_atores_no_total,
                                     itemsOnPage: limite,
@@ -225,7 +225,7 @@
                                     $stringona = $stringona + "/assets/img/notfound.jpg";
                                 }
                                 $stringona = $stringona + "'></img> </div>" + "<div class='col-lg-offset-1 col-md-7 col-lg-7'> <div class='row'><h1>" + act_name 
-                                        + ":</h1></div><div class='row'> <h3> Trabalhou em:</h3> </div> <div id='movies_feitos'>  <i class='fa fa-spinner fa-spin' style='font-size:24px'></i>Carregando informações! </div> </div>";
+                                        + ":</h1></div><div class='row'> <h3> Trabalhou em:</h3> </div> <div id='movies_feitos'>  <i class='fa fa-spinner fa-spin' style='font-size:24px; color:#3498db; margin-right: 5px'></i>Carregando informações! </div> </div>";
                                 $('#modal-content').html($stringona);
                                 $url = '/Ranking?opcao=top10&act_id=' + act_id;
                                 $.get($url, function (movies) {
@@ -251,7 +251,7 @@
                             }
 
                             function addConteudo(n_lang, pagina) {
-                                document.getElementById('content-' + n_lang).innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>Carregando informações! '; // Carregando...
+                                document.getElementById('content-' + n_lang).innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size:24px; color:#3498db; margin-right: 5px"></i>Carregando informações! '; // Carregando...
                                 $url = "/Ranking?opcao=pagina&completa=0&n_lang=" + n_lang + "&limit=" + limite + "&offset=" + ((pagina - 1) * limite);
                                 $.get($url, function (array_de_atores) {
                                     document.getElementById('content-' + n_lang).innerHTML = "";
@@ -271,10 +271,10 @@
                                     alert("Tempo esgotado!");
                                 },
                                 success: function (data) {
-                                    $("#divbotao").html(' <input class="btn btn-primary" type="button" value="Novo Ranking!" onclick="window.location = window.location.pathname;">');
+                                    $("#divbotao").html(' <input id="buttonQuery2" class="btn btn-primary" type="button" value="Novo Ranking!" onclick="window.location = window.location.pathname;">');
                                     $.each(data, function (index, value) {
                                         //Criando os botões de colapso:
-                                        $('#content').append("  <div class='panel panel-default'><div class='panel-heading'><h4 class='panel-title'><a data-toggle='collapse' href='#collapso-" + value + "' data-parent='#content'> Mostrar Ranking " + value + " </a></h4></div><div class='panel-collapse collapse' id='collapso-" + value + "'> <div class='panel-body'> <div id='content-" + value + "'> Carregando... </div><div id='pag-" + value + "'> </div></div></div> </div>");
+                                        $('#content').append("  <div class='panel panel-default'><div class='panel-heading'><h4 class='panel-title'><a data-toggle='collapse' href='#collapso-" + value + "' data-parent='#content'> Mostrar Ranking " + value + " </a></h4></div><div class='panel-collapse collapse' id='collapso-" + value + "'> <div class='panel-body'> <div class='resultAccordion' id='content-" + value + "'> Carregando... </div><div id='pag-" + value + "'> </div></div></div> </div>");
                                         $.get("/Ranking?opcao=qtd&completa=0&n_lang=" + value, function (quantidade_de_atores_na_pagina) {
                                             if (quantidade_de_atores_na_pagina > limite) {
                                                 $('#pag-' + value).pagination({
