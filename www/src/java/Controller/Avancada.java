@@ -21,7 +21,6 @@ import Model.Genero;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-
 /**
  *
  * @author carlagama
@@ -39,16 +38,49 @@ public class Avancada extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        
+         //No controller vai ter algo:
+        //doPost(){
+        //Bla = request.getParameterValue("nome");
+        //// faz bla virar de json para java array
+        //For(ator : Atores)
+        //{ new actor num arraylist}
+        //}
+        String json = request.getParameter("tagINGRID");
+
+        if (json != null) {
+            JSONObject json_actor = new JSONObject(json);
+            JSONArray array_actor = json_actor.getJSONArray("label_do_array");
+
+            Actor[] acts;
+            acts = new Actor[array_actor.length()];
+            Genero genre = new Genero();
+
+            /*Primeira entrada do json é o genero.*/
+            genre.setGenre((String) array_actor.get(0));
+            System.out.println(genre.getGenre());
+
+            for (int i = 1; i < array_actor.length(); i++) {
+                acts[i].setActorName((String) array_actor.get(i));
+                System.out.println("[" + i + "]: " + acts[i].getActorName());
+            }
+
+        } else {
+            response.getWriter().print("[\"Escolha um gênero!\"]");
+        }
+
+        
         
         
         MovieDAO mv = new MovieDAO();
-        
-         GsonBuilder builder = new GsonBuilder();
+
+        GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
-        
-         response.setContentType("application/json");
+
+        response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        
+
         /*ArrayList<Movie> result;
         result = mv.getMovie();
         response.getWriter().print(gson.toJson(result));*/
@@ -66,7 +98,10 @@ public class Avancada extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        // processRequest(request, response);
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().print("<html><head><meta charset=\"utf-8\"</head><body><h1>Apenas requisições POST por favor!</body></html>"); 
     }
 
     /**
@@ -81,40 +116,9 @@ public class Avancada extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
-                //No controller vai ter algo:
-                //doPost(){
-                //Bla = request.getParameterValue("nome");
-                //// faz bla virar de json para java array
-                //For(ator : Atores)
-                //{ new actor num arraylist}
-                //}
 
-            String json = request.getParameter("tagINGRID");
-
-            if(json != null) {
-                JSONObject json_actor = new JSONObject(json);
-                JSONArray array_actor = json_actor.getJSONArray("label_do_array");
-                
-                Actor[] acts;
-                acts = new Actor[array_actor.length()];
-                Genero genre = new Genero();
-                
-                /*Primeira entrada do json é o genero.*/
-                genre.setGenre((String) array_actor.get(0));
-                System.out.println(genre.getGenre());
-                
-                for(int i = 1; i < array_actor.length(); i++) {
-                  acts[i].setActorName((String) array_actor.get(i));
-                  System.out.println("[" + i + "]: " + acts[i].getActorName());
-                }
-                
-            }else {
-              response.getWriter().print("[\"Escolha um gênero!\"]");
-            }
-
+   
     }
-    
 
     /**
      * Returns a short description of the servlet.
