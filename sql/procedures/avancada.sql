@@ -57,4 +57,20 @@ $BODY$
 
 ALTER FUNCTION public.select_movie_actors_in_common(genre TEXT, actor_one TEXT, actor_two TEXT, actor_tree TEXT, actor_four TEXT, actor_five TEXT)
 
-  OWNER TO postgres;
+  OWNER TO aluno;
+
+
+
+DROP FUNCTION IF EXISTS additional_fields(INTEGER);
+CREATE OR REPLACE FUNCTION additional_fields(INTEGER)
+RETURNS TABLE (actornames TEXT[], dnames character varying(500)[] , langs varchar[]) AS
+$BODY$
+BEGIN
+
+RETURN QUERY (SELECT ARRAY(SELECT actorname FROM (SELECT DISTINCT actorname, n_lang FROM act NATURAL JOIN actor WHERE movieid = $1 ORDER BY n_lang DESC LIMIT 20) as B), ARRAY(SELECT dname FROM director NATURAL JOIN director_movie WHERE movieid = $1), ARRAY(SELECT lang FROM lang WHERE movieid = $1));
+  
+  
+END
+$BODY$
+  LANGUAGE plpgsql VOLATILE;
+ ALTER FUNCTION additional_fields(INTEGER)  OWNER TO aluno;
