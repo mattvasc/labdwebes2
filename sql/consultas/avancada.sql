@@ -20,3 +20,6 @@ SELECT distinct movieid, title, mvyear, genre
      INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = 'Henry Castle') as sub3
    ))))AS atores_movieid
     NATURAL JOIN movie order by movieid
+
+--versao like
+SELECT * FROM select_movie_actors_in_common ('Comédia'::text, 'Timothy Spall'::text, 'Bradley Ford'::text, 'Henry Castle'::text, NULL, NULL)
