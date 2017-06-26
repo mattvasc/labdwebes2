@@ -170,7 +170,7 @@
 
 
                             if (document.getElementById('ranking_completo_1').checked) {
-                                paginacao_completa($("#n_lang_min").val(), $("#n_lang_max").val(), 15);
+                                paginacao_completa($("#n_lang_min").val(), $("#n_lang_max").val(), 14);
                             } else if (document.getElementById('ranking_completo_0').checked)
                             {
                                 paginacao_agrupada($("#n_lang_min").val(), $("#n_lang_max").val(), 10);
@@ -195,7 +195,7 @@
                                 });
                             }
                             // Criando a div de paginacao
-                            $('#content').html("<div id='content-geral'></div> <div id='pag-geral'></div> ");
+                            $('#content').html("<div id='containComplet' class='container'><div class='row'><div id='content-geral'></div></div><div class='row'><div id='pag-geral'></div></div></div>");
                             //Calculando o número total de atores e criando a paginacao:
                             $url = "/Ranking?opcao=qtd&completa=1&n_lang_min=" + min + "&n_lang_max=" + max;
                             $.get($url, function (quantidade_de_atores_no_total) {

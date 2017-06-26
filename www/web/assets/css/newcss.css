@@ -716,3 +716,16 @@ h1, h2, h3 {
     margin: 20px 0 25px 20px;
     min-height: 180px !important;
 }
+
+#containComplet {
+    width: 80%;
+    border: 1px solid #3498db;
+    border-radius: 7px;
+    background-color: white;
+}
+
+#content-geral {
+    margin-top: 28px;
+    margin-bottom: 28px;
+    min-height: 308px !important;
+}
