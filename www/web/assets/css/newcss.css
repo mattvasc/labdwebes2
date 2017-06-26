@@ -729,3 +729,11 @@ h1, h2, h3 {
     margin-bottom: 28px;
     min-height: 308px !important;
 }
+
+.metade {
+    width: 50%;
+}
+
+.metade button {
+    width: 100%;
+}

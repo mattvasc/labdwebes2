@@ -42,23 +42,28 @@
             </div><!-- blue wrap -->
 
             <div class="container w" id="antes">
-
-                <div class="row centered">
-
-                    <div class="col-lg-6" id="inputAtores">
-                        <div class="row"><label for="ator-0"> Ator: <input type ="text" name="ator" id="ator-0"> </label> </div>
-
+                <div class="row">
+                    <div class="btn-group col-lg-offset-2 col-lg-8 col-md-8">
+                        <div class="btn-group metade" id="divadd">
+                            <button class="btn btn-primary" id="btAtores" onclick="addAtores()" type="button">Adicionar mais Ator</button> 
+                        </div>
+                        <div class="btn-group metade" id="divremove">
+                            <button class="btn btn-primary" id=" bAtores" onclick="removeAtores()" type="button">Remover um Ator</button>
+                        </div>        
                     </div>
-                    <div class="col-lg-6">
-                        <div class="row" id="divadd"><button id="btAtores" onclick="addAtores()" type="button" style="width: 22ch">Adicionar mais Ator</button> </div>
-                        <div class="row" id="divremove"><button id=" bAtores" onclick="removeAtores()" style="width: 22ch" type="button">Remover um Ator</button> </div>
-                        <div class="row"><label> Gênero: <select id="comboboxGenero" name="genero"> 
-                                    <option value="default">-- Selecione --
-                                    </option>
-                                </select> </label> </div>
+                </div>
+                <div class="row">
+                        <div class="col-lg-6" id="inputAtores">
+                            <div class="row"><label for="ator-0"> Ator: <input type ="text" name="ator" id="ator-0"> </label> </div>
 
-                    </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row"><label> Gênero: <select id="comboboxGenero" name="genero"> 
+                                        <option value="default">-- Selecione --
+                                        </option>
+                                    </select> </label> </div>
 
+                        </div>
                 </div>
                 <div class="row centered"><button id="btBuscar" onclick="buscar()" type="button">Buscar</button> </div>
 
