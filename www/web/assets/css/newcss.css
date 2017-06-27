@@ -737,3 +737,7 @@ h1, h2, h3 {
 .metade button {
     width: 100%;
 }
+
+#btnGroupRow {
+    margin-bottom: 20px;
+}

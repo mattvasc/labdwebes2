@@ -42,7 +42,7 @@
             </div><!-- blue wrap -->
 
             <div class="container w" id="antes">
-                <div class="row">
+                <div class="row" id="btnGroupRow">
                     <div class="btn-group col-lg-offset-2 col-lg-8 col-md-8">
                         <div class="btn-group metade" id="divadd">
                             <button class="btn btn-primary" id="btAtores" onclick="addAtores()" type="button">Adicionar mais Ator</button> 
@@ -54,8 +54,14 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-offset-2 col-lg-8 col-md-8" id="inputAtores">
-                        <div class="row"><label for="ator-0"> Ator: <input class="form-control" type ="text" name="ator" id="ator-0"> </label> </div>
-
+                        <div class="form-group">
+                            <div class="col-lg-1 col-md-1">
+                                <label for="ator-0"> Ator:</label>  
+                            </div>
+                            <div class="col-lg-11 col-md-11">
+                                <input class="form-control" type="text" name="ator" id="ator-0"> 
+                            </div>
+                        </div>
                     </div>
                     <div class="col-lg-offset-2 col-lg-8 col-md-8">
                         <div class="row"><label> Gênero: <select id="comboboxGenero" name="genero"> 
