@@ -6,7 +6,7 @@
         <meta name="viewport" content="wdth=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="shortcut icon" href="assets/ico/favicon.png">
+        <link rel="shortcut icon" href="assets/ico/favicon.ico">
         <script src="assets/js/jquery-3.2.1.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
 
