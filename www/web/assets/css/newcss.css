@@ -571,7 +571,7 @@ footer .container {
     padding: 1.2% 0;
 }
 
-#query2Content .row {
+#queryContent .row {
     margin-left: 0;
     margin-right: 0;
 }
@@ -710,9 +710,9 @@ h1, h2, h3 {
     transition: none;
 }
 
-#query2Content li.active span, 
-#query2Content span.current.prev,
-#query2Content span.current.next {
+#queryContent li.active span, 
+#queryContent span.current.prev,
+#queryContent span.current.next {
     background-color: #3498db;
     border-color: #3498db;
 }
@@ -740,7 +740,7 @@ h1, h2, h3 {
 }
 
 .metade button {
-    width: 100%;
+    width: 1000%;
 }
 
 #btnGroupRow {

@@ -23,7 +23,7 @@
     <body>
         <%@include file="cabecalho.jsp" %>
 
-        <section id="query2Content">
+        <section id="queryContent">
             <div id="blue">
                 <div class="container">
                     <div class="row centered">

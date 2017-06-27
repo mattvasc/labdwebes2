@@ -29,7 +29,7 @@
     <body>
         <%@include file= "cabecalho.jsp" %>
 
-        <section> 
+        <section id="queryContent"> 
             <div id="blue">
                 <div class="container">
                     <div class="row centered">
@@ -241,16 +241,16 @@
 
 
                 function addConteudo(pagina) {
-                    $("#content").empty();
+                    $("#content-geral").empty();
                     for (var i = (pagina - 1) * limite; i < filmes.length && i < pagina * limite; i++) {
-                        document.getElementById('content').innerHTML += " <tag style='cursor: pointer;' onclick='mostrar_modal(\" " + filmes[i].title + "\", \"" + filmes[i].mvyear + "\", " + filmes[i].movieid + ");'>" + filmes[i].title + "</tag><br />";
+                        document.getElementById('content-geral').innerHTML += " <tag style='cursor: pointer;' onclick='mostrar_modal(\" " + filmes[i].title + "\", \"" + filmes[i].mvyear + "\", " + filmes[i].movieid + ");'>" + filmes[i].title + "</tag><br />";
 
                     }
                 }
 
                 posting.done(function (data) {
                     $("#antes").hide();
-                    $("#result").html("<div id=\"content\"> </div> <div id=\"paginacao\"></div>");
+                    $("#result").html("<div id=\"content\" class=\"col-lg-offset-1 col-lg-10 col-md-10 panel-group\"><div id='containComplet' class='container'><div class='row'><div id='content-geral'></div></div><div class='row'><div id=\"paginacao\"></div></div></div>");
 
                     filmes = [];
                     $.each(data, function (index, d) {
