@@ -556,7 +556,8 @@ footer .container {
 }
 
 #buttonQuery1, #btBuscar {
-    margin-top: 6%;
+    margin-top: 2%;
+    margin-bottom: 7%;
     width: 21%;
     padding: 1.2% 0;
 }

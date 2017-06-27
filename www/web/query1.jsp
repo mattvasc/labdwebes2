@@ -163,8 +163,8 @@
                         $stringona = $stringona + "/assets/img/not-found.png";
                     }
                     $stringona = $stringona + "'></img> </div>" + "<div class='col-lg-offset-1 col-md-8 col-lg-8'><div class='row'>  <div id='directors-div' class='col-lg-4 col-md-4'><div class='row'><h1>Diretor(s): </h1></div></div> <div class='col-lg-4 col-md-4' id='genre-div'>" +
-                            " <div class='row'> <h1> Gênero(s):</h1>   </div></div> <div class=\"col-md-4 col-lg-4\" id='lang-div'> <div class='row'><h1> Idioma(s):</h1> </div></div> <div id='actors-div'> <div class='row'> <div class='offset-lg-4 offset-md-4'>   <h1>Atores:" +
-                            "</h1></div></div> </div></div>";
+                            " <div class='row'> <h1> Gênero(s):</h1>   </div></div> <div class=\"col-md-4 col-lg-4\" id='lang-div'> <div class='row'><h1> Idioma(s):</h1> </div></div></div><div class='row'><div id='actors-div'> <div style='margin-top: 20px' class='row'> <div class='offset-lg-4 offset-md-4'>   <h1>Atores:" +
+                            "</h1></div></div> </div></div></div>";
                     $('#modal-content').html($stringona);
 
                     $url = '/Avancada';
@@ -182,11 +182,11 @@
                         });
 
                         $.each(data.langs, function (index, value) {
-                            $('#lang-div').append(value.lang);
+                            $('#lang-div').append("<div class='row'>" + value.lang + "</div>");
 
                         });
                         $.each(data.generos, function (index, value) {
-                            $('#genre-div').append(value.genre);
+                            $('#genre-div').append("<div class='row'>" + value.genre + "</div>");
 
                         });
 
@@ -247,8 +247,12 @@
 
                 function addConteudo(pagina) {
                     $("#content-geral").empty();
+                    var stringa;
                     for (var i = (pagina - 1) * limite; i < filmes.length && i < pagina * limite; i++) {
-                        document.getElementById('content-geral').innerHTML += " <tag style='cursor: pointer;' onclick='mostrar_modal(\" " + filmes[i].title + "\", \"" + filmes[i].mvyear + "\", " + filmes[i].movieid + ");'>" + filmes[i].title + "</tag><br />";
+                        stringa = filmes[i].title;
+                        stringa = stringa.replace("'","");
+                        stringa = stringa.replace("\"","");
+                        document.getElementById('content-geral').innerHTML += " <tag style='cursor: pointer;' onclick='mostrar_modal(\" " + stringa + "\", \"" + filmes[i].mvyear + "\", " + filmes[i].movieid + ");'>" + filmes[i].title + "</tag><br />";
 
                     }
                 }
