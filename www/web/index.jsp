@@ -38,7 +38,7 @@
         
         <section class="slides">
             <iframe
-                src="slides.jsp" scrolling="no" frameborder="0" 
+                src="slides.html" scrolling="no" frameborder="" 
                 webkitallowfullscreen mozallowfullscreen allowfullscreen id="iframeHome">
             </iframe>
         </section>
