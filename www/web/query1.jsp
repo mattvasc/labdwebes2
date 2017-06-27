@@ -236,7 +236,7 @@
                 var posting = $.post("/Avancada", {opcao: "lista", json: stringTotal});
 
                 // Put the results in a div
-                var limite = 15;
+                var limite = 14;
 
 
 
@@ -250,7 +250,7 @@
 
                 posting.done(function (data) {
                     $("#antes").hide();
-                    $("#result").html("<div id=\"content\" class=\"col-lg-offset-1 col-lg-10 col-md-10 panel-group\"><div id='containComplet' class='container'><div class='row'><div id='content-geral'></div></div><div class='row'><div id=\"paginacao\"></div></div></div>");
+                    $("#result").html("<div id=\"content\" class=\"col-lg-offset-1 col-lg-10 col-md-10 panel-group\"><div id='containComplet' class='container avanc'><div class='row'><div id='content-geral'></div></div><div class='row'><div id=\"paginacao\"></div></div></div>");
 
                     filmes = [];
                     $.each(data, function (index, d) {

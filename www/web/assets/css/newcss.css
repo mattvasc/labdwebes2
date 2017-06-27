@@ -755,3 +755,9 @@ h1, h2, h3 {
 .form-group label {
     margin-top: 5px;
 }
+
+.avanc {
+    margin-top: 35px;
+    margin-bottom: 100px;
+    width: 67%;
+}

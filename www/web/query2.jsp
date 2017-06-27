@@ -28,7 +28,7 @@
                 <div class="container">
                     <div class="row centered">
                         <div class="col-lg-8 col-lg-offset-2">
-                            <h2><b>Ranking de Atores Poliglotas</b></h2>
+                            <h2><b>RANKING DE ATORES POLIGLOTAS</b></h2>
                             <p id="queryText">Visualize o ranking de atores que participaram de mais filmes em idiomas diferentes!</p>
                         </div>
                     </div><!-- row -->
