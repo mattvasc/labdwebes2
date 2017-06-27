@@ -54,7 +54,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-offset-2 col-lg-8 col-md-8" id="inputAtores">
-                        <div class="form-group">
+                        <div class="form-group ator-0">
                             <div class="col-lg-1 col-md-1">
                                 <label for="ator-0"> Ator:</label>  
                             </div>
@@ -63,15 +63,25 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-lg-offset-2 col-lg-8 col-md-8">
-                        <div class="row"><label> Gênero: <select id="comboboxGenero" name="genero"> 
-                                    <option value="default">-- Selecione --
-                                    </option>
-                                </select> </label> </div>
-
+                        <div class="form-group">
+                            <div class="col-lg-1 col-md-1">
+                                <label for="comboboxGenero"> Gênero: </label>
+                            </div>
+                            <div class="col-lg-11 col-md-11">
+                                <select class="form-control" id="comboboxGenero" name="genero"> 
+                                    <option value="default">-- Selecione -- </option>
+                                </select>
+                            </div>
+                              
+                        </div>
                     </div>
                 </div>
-                <div class="row centered"><button id="btBuscar" onclick="buscar()" type="button">Buscar</button> </div>
+                <div class="row centered div-botao">
+                    <button class="btn btn-primary" id="btBuscar" onclick="buscar()" type="button">Buscar</button> 
+                </div>
 
             </div><!-- container -->  
 
@@ -124,7 +134,7 @@
             function addAtores() {
 
                 if (aux < 4) {
-                    var item = "<div class='row ator-" + aux + "'> <label class='ator-" + ++aux + "' for='ator-" + aux + "'> Ator: <input class='ator-" + aux + "' type='text'name='ator' id='ator-" + aux + "' > </label> </div>";
+                    var item = "<div class='form-group ator-" + aux +"'><div class='col-lg-1 col-md-1'><label for='ator-" + ++aux + "' for='ator-" + aux + "'> Ator:</label>  </div><div class='col-lg-11 col-md-11'><input class='form-control ator-" + aux + "' type='text' name='ator' id='ator-" + aux + "'></div></div></div></div>";
                     $("#inputAtores").append(item);
                 } else
                     alert("Maximo de 5 atores");
