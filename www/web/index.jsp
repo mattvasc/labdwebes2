@@ -28,8 +28,7 @@
                 <div class="container">
                     <div class="row centered">
                         <div class="col-lg-12">
-                            <h1><b>CineData</b></h1>
-                            <h2>O banco de filmes BR</h2>
+                         
                         </div>
                     </div><!-- row -->
                 </div><!-- container -->
