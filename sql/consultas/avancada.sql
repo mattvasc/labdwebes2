@@ -11,15 +11,17 @@ WHERE genre.genre = 'Comédia' AND LOWER(lang.lang) LIKE 'portuguese%';
 	USING (movieid);
 
 --versao nova usando INTERSECT
+SELECT distinct movieid, title, mvyear
+	FROM (SELECT movieid FROM genre WHERE genre = <genero>) AS generos
+	NATURAL JOIN (
+		(SELECT movieid FROM act NATURAL JOIN
+			(SELECT actorid FROM actor WHERE actor.actorname LIKE <actor_one> ||'%') as sub1
+		INTERSECT (SELECT movieid FROM act NATURAL JOIN
+			(SELECT actorid FROM actor WHERE actor.actorname LIKE <actor_two> ||'%') as sub2
+		INTERSECT (SELECT movieid FROM act NATURAL JOIN
+			(SELECT actorid FROM actor WHERE actor.actorname LIKE <actor_tree> ||'%') as sub3
+	))))AS atores_movieid NATURAL JOIN movie order by title);
+do no git status
 
-SELECT distinct movieid, title, mvyear, genre
-  FROM (SELECT movieid, genre FROM genre WHERE genre = 'Comédia') AS generos
-  NATURAL JOIN (
-    (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = 'Timothy Spall') as sub1
-     INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = 'Bradley Ford') as sub2
-     INTERSECT (SELECT movieid FROM act NATURAL JOIN (SELECT actorid FROM actor WHERE actor.actorname = 'Henry Castle') as sub3
-   ))))AS atores_movieid
-    NATURAL JOIN movie order by movieid
-
---versao like
+--Exemplo de execução da procedure:
 SELECT * FROM select_movie_actors_in_common ('Comédia'::text, 'Timothy Spall'::text, 'Bradley Ford'::text, 'Henry Castle'::text, NULL, NULL)
