@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-	<html class="sl-root decks export loaded ua-phantomjs reveal-viewport theme-font-league theme-color-sky-blue">
+	<html style="padding-top: 100px" class="sl-root decks export loaded ua-phantomjs reveal-viewport theme-font-league theme-color-sky-blue">
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="utf-8">
