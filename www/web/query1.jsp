@@ -98,6 +98,9 @@
             <div id="result" class="row ">
 
             </div>
+            <div id="butao" class="row centered" style="display: none">
+                <input id="buttonQuery1" class="btn btn-primary" type="button" value="Novo Ranking!" onclick="window.location = window.location.pathname;">
+            </div>
         </section>
 
         <%@include file = "rodape.jsp" %>
@@ -207,9 +210,6 @@
                 var stringTotal = "";
                 var array_atores = [];
                 
-                $("#antes").hide();
-                $("#result").html('<div class="row centered" style="margin-top: 75px"><i class="fa fa-spinner fa-spin" style="font-size:24px; color:#3498db; margin-right: 5px"></i><p style="color: black">Carregando informações!</p></div>');
-                
                 for (var i = 0; i <= aux; i++)
                     if ($("#ator-" + i) && $.trim($("#ator-" + i).val().length) > 1)
                         array_atores.push($.trim(capitalize($("#ator-" + i).val())));
@@ -221,6 +221,12 @@
                     alert("Nos informe o gênero do filme!");
                     return;
                 }
+                
+                
+                $("#antes").hide();
+                $("#result").html('<div class="row centered" style="margin-top: 75px"><i class="fa fa-spinner fa-spin" style="font-size:24px; color:#3498db; margin-right: 5px"></i><p style="color: black">Carregando informações!</p></div>');
+                        
+                $("#butao").show(); 
 
                 stringTotal = '{"GENERO": "' + document.getElementById("comboboxGenero").value + '",';
                 for (var i = 0; i < array_atores.length; i++) {
@@ -252,6 +258,10 @@
                     $("#result").html("<div id=\"content\" class=\"col-lg-offset-1 col-lg-10 col-md-10 panel-group\"><div id='containComplet' class='container avanc'><div class='row'><div id='content-geral'></div></div><div class='row'><div id=\"paginacao\"></div></div></div>");
 
                     filmes = [];
+                    
+                    if(data.length==0){
+                        $("#containComplet").html("<div class='row centered'><h4><b>Não foram encontrados resultados para esse filtro de pesquisa!</b></h4></div>");
+                    }
                     $.each(data, function (index, d) {
 
                         var obj = new Object();
