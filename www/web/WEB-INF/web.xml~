@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>ListaGenero</servlet-name>
+        <servlet-class>Controller.ListaGenero</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListaGenero</servlet-name>
+        <url-pattern>/ListaGenero</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Ranking</servlet-name>
+        <servlet-class>Controller.Ranking</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Ranking</servlet-name>
+        <url-pattern>/Ranking</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Avancada</servlet-name>
+        <servlet-class>Controller.Avancada</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Avancada</servlet-name>
+        <url-pattern>/Avancada</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>viewAbout</servlet-name>
+        <jsp-file>/about.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>viewAbout</servlet-name>
+        <url-pattern>/SobreNos</url-pattern>
+    </servlet-mapping> 
+    <servlet>
+        <servlet-name>viewRanking</servlet-name>
+        <jsp-file>/query2.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>viewRanking</servlet-name>
+        <url-pattern>/GerarRanking</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>viewAvançada</servlet-name>
+        <jsp-file>/query1.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>viewAvançada</servlet-name>
+        <url-pattern>/ConsultaAvancada</url-pattern>
+    </servlet-mapping>
+  <servlet> 
+        <servlet-name>Index</servlet-name>
+        <jsp-file>/index.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Index</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
+
+
+    
+        
+   
