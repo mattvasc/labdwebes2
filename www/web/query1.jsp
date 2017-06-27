@@ -132,9 +132,8 @@
             });
             var aux = 0;
             function addAtores() {
-
                 if (aux < 4) {
-                    var item = "<div class='form-group ator-" + aux +"'><div class='col-lg-1 col-md-1'><label for='ator-" + ++aux + "' for='ator-" + aux + "'> Ator:</label>  </div><div class='col-lg-11 col-md-11'><input class='form-control ator-" + aux + "' type='text' name='ator' id='ator-" + aux + "'></div></div></div></div>";
+                    var item = "<div class='form-group ator-" + ++aux +"'><div class='col-lg-1 col-md-1'><label for='ator-" + aux + "' for='ator-" + aux + "'> Ator:</label>  </div><div class='col-lg-11 col-md-11'><input class='form-control ator-" + aux + "' type='text' name='ator' id='ator-" + aux + "'></div></div></div></div>";
                     $("#inputAtores").append(item);
                 } else
                     alert("Maximo de 5 atores");
@@ -149,7 +148,6 @@
                 var regex = /.+?(?=\()/;
 
                 $url = 'https://api.themoviedb.org/3/search/movie?api_key=088e7711438e5b1544142df8f44709de&query=' + encodeURI($.trim(title.match(regex))) + "&year=" + mvyear.substring(0, 4);
-                console.log($url);
                 document.body.style.cursor = "progress";
                 $.get($url, function (json) {
                    document.body.style.cursor ="default";
@@ -167,9 +165,7 @@
                     $('#modal-content').html($stringona);
 
                     $url = '/Avancada';
-                    console.log(mid);
                     $.post($url, {opcao: "busca", movieid: mid}, function (data) {
-                        console.log(data);
                         var i = 0;
                         $.each(data.actors, function (index, value) {
                             
@@ -235,7 +231,6 @@
                 }
 
                 stringTotal += '"ATORES": [' + stringAtores + ']}';
-                console.log(stringTotal);
                 // Send the data using post
                 var posting = $.post("/Avancada", {opcao: "lista", json: stringTotal});
 
