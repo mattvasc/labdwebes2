@@ -183,22 +183,25 @@
 
 
 
+        function capitalize(s){
+            return s.toLowerCase().replace( /\b./g, function(a){ 
+                return a.toUpperCase(); 
+            });
+        };
 
-
-
+            
             function buscar() {
-
                 obj = new Object();
                 var stringAtores = "";
                 var stringTotal = "";
                 var array_atores = [];
                 for (var i = 0; i <= aux; i++)
                     if ($("#ator-" + i) && $.trim($("#ator-" + i).val().length) > 1)
-                        array_atores.push($.trim($("#ator-" + i).val()));
-                if (array_atores.length == 0) {
-                    alert("Nos informe ao menos um ator!");
-                    return;
-                }
+                        array_atores.push($.trim(capitalize($("#ator-" + i).val())));
+                     if (array_atores.length == 0) {
+                        alert("Nos informe ao menos um ator!");
+                        return;
+                    }
                 if (document.getElementById("comboboxGenero").value == "default") {
                     alert("Nos informe o gênero do filme!");
                     return;
