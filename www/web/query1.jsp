@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-offset-2 col-lg-8 col-md-8">
+                    <div style="margin-top: 20px" class="col-lg-offset-2 col-lg-8 col-md-8">
                         <div class="form-group">
                             <div class="col-lg-1 col-md-1">
                                 <label for="comboboxGenero"> Gênero: </label>
@@ -226,7 +226,7 @@
                 $("#antes").hide();
                 $("#result").html('<div class="row centered" style="margin-top: 75px"><i class="fa fa-spinner fa-spin" style="font-size:24px; color:#3498db; margin-right: 5px"></i><p style="color: black">Carregando informações!</p></div>');
                         
-                $("#butao").show(); 
+               
 
                 stringTotal = '{"GENERO": "' + document.getElementById("comboboxGenero").value + '",';
                 for (var i = 0; i < array_atores.length; i++) {
@@ -258,7 +258,7 @@
                 }
 
                 posting.done(function (data) {
-                    
+                    $("#butao").show(); //Quando o post terminar, o botão Gerar Ranking aparece 
                     $("#result").html("<div id=\"content\" class=\"col-lg-offset-1 col-lg-10 col-md-10 panel-group\"><div id='containComplet' class='container avanc'><div class='row'><div id='content-geral'></div></div><div class='row'><div id=\"paginacao\"></div></div></div>");
 
                     filmes = [];
